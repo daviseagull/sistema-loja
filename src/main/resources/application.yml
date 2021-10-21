@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:admin123@cluster0.shovo.mongodb.net/sistema-loja?retryWrites=true&w=majority
+
+  security:
+    user:
+      name: admin
+      password: admin123
