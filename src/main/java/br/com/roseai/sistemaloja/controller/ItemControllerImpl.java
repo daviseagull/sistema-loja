@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("item/v1")
 @RequiredArgsConstructor
-public class ItemControllerImpl {
+public class ItemControllerImpl implements ItemController {
 
     private final ItemService service;
 
@@ -28,7 +28,7 @@ public class ItemControllerImpl {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping()
+    @GetMapping("/list")
     public ResponseEntity<List<Item>> getItens() {
         return ResponseEntity.ok(service.getResumoEstoque());
     }
