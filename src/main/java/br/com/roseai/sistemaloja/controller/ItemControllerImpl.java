@@ -20,9 +20,9 @@ public class ItemControllerImpl implements ItemController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Item> getItem(@PathVariable String id) {
-        Optional<Item> itemOpt = service.findById(id);
+        var itemOpt = service.findById(id);
         if (itemOpt.isPresent()) {
-            Item item = itemOpt.get();
+            var item = itemOpt.get();
             return ResponseEntity.ok(item);
         }
         return ResponseEntity.ok().build();
@@ -35,7 +35,7 @@ public class ItemControllerImpl implements ItemController {
 
     @PostMapping()
     public ResponseEntity<String> createItem(@RequestBody ItemDTO item) {
-        Item createdItem = service.save(item);
+        var createdItem = service.save(item);
         return ResponseEntity.created(URI.create("/item/" + createdItem.getCodigo())).build();
     }
 

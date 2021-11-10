@@ -6,6 +6,7 @@ import br.com.roseai.sistemaloja.model.VendaDTO;
 import br.com.roseai.sistemaloja.repository.VendaRepository;
 import br.com.roseai.sistemaloja.service.VendaService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class VendaServiceImpl implements VendaService {
 
     private final VendaRepository repository;
@@ -27,15 +29,20 @@ public class VendaServiceImpl implements VendaService {
 
     @Override
     public List<ResumoVendaDTO> getResumoVendas() {
-        List<Venda> vendas = repository.findAll();
-        return vendas.stream()
+        var vendas = repository.findAll();
+
+        var resumoVenda = vendas.stream()
                 .map(this::toResumoVendaDTO)
                 .toList();
+
+        log.info("Retornando resumo de vendas: {} ", resumoVenda);
+        return resumoVenda;
+
     }
 
     @Override
     public Venda save(VendaDTO vendaDTO) {
-        Venda venda = this.toVenda(vendaDTO);
+        var venda = this.toVenda(vendaDTO);
         venda.setDataCriacao(LocalDateTime.now());
         return repository.save(venda);
     }
