@@ -1,13 +1,14 @@
-package br.com.roseai.sistemaloja.entity;
+package br.com.roseai.sistemaloja.model;
 
-import br.com.roseai.sistemaloja.model.Cliente;
-import lombok.Getter;
-import lombok.Setter;
+import br.com.roseai.sistemaloja.entity.Item;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
-@Setter
+@Builder
+@ToString
+@EqualsAndHashCode
 public class VendaDTO {
 
     private String id;

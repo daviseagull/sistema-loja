@@ -1,8 +1,8 @@
 package br.com.roseai.sistemaloja.service;
 
-import br.com.roseai.sistemaloja.entity.ResumoVendaDTO;
+import br.com.roseai.sistemaloja.model.ResumoVendaDTO;
 import br.com.roseai.sistemaloja.entity.Venda;
-import br.com.roseai.sistemaloja.entity.VendaDTO;
+import br.com.roseai.sistemaloja.model.VendaDTO;
 
 import java.util.List;
 import java.util.Optional;
