@@ -1,10 +1,11 @@
 package br.com.roseai.sistemaloja.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
-@Setter
+@Builder
+@ToString
+@EqualsAndHashCode
 public class Cliente {
 
     private String cpf;

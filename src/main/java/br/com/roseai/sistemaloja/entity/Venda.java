@@ -1,8 +1,7 @@
 package br.com.roseai.sistemaloja.entity;
 
 import br.com.roseai.sistemaloja.model.Cliente;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +11,9 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@ToString
+@EqualsAndHashCode
 @Document
 public class Venda implements Serializable {
 
