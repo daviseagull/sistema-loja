@@ -21,9 +21,9 @@ public class VendaControllerImpl implements VendaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Venda> getVenda(@PathVariable String id) {
-        Optional<Venda> vendaOpt = service.findById(id);
+        var vendaOpt = service.findById(id);
         if (vendaOpt.isPresent()) {
-            Venda venda = vendaOpt.get();
+            var venda = vendaOpt.get();
             return ResponseEntity.ok(venda);
         }
         return ResponseEntity.ok().build();
@@ -36,7 +36,7 @@ public class VendaControllerImpl implements VendaController {
 
     @PostMapping("")
     public ResponseEntity<String> createVenda(@RequestBody VendaDTO venda) {
-        Venda createdVenda = service.save(venda);
+        var createdVenda = service.save(venda);
         return ResponseEntity.created(URI.create("/venda/" + createdVenda.getId())).build();
     }
 
