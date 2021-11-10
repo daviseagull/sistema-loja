@@ -10,18 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("venda/v1")
 @RequiredArgsConstructor
 public class VendaControllerImpl implements VendaController {
 
-    private final VendaService service;
+    private final VendaService vendaService;
 
     @GetMapping("/{id}")
     public ResponseEntity<Venda> getVenda(@PathVariable String id) {
-        var vendaOpt = service.findById(id);
+        var vendaOpt = vendaService.findById(id);
         if (vendaOpt.isPresent()) {
             var venda = vendaOpt.get();
             return ResponseEntity.ok(venda);
@@ -31,12 +30,12 @@ public class VendaControllerImpl implements VendaController {
 
     @GetMapping("/list")
     public ResponseEntity<List<ResumoVendaDTO>> getResumoVendas() {
-        return ResponseEntity.ok(service.getResumoVendas());
+        return ResponseEntity.ok(vendaService.getResumoVendas());
     }
 
     @PostMapping("")
     public ResponseEntity<String> createVenda(@RequestBody VendaDTO venda) {
-        var createdVenda = service.save(venda);
+        var createdVenda = vendaService.save(venda);
         return ResponseEntity.created(URI.create("/venda/" + createdVenda.getId())).build();
     }
 

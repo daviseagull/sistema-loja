@@ -12,9 +12,9 @@ public interface ItemService {
 
     Optional<Item> findById(String itemId);
 
-    Item save(ItemDTO venda);
+    Item save(Item venda);
 
-    void update(String id, ItemDTO item);
+    void update(String id, Item item);
 
     void delete(String itemId);
 

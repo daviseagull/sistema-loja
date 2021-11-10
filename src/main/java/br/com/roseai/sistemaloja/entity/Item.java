@@ -47,12 +47,4 @@ public class Item {
             required = true
     )
     private Integer quantidade;
-
-    @Schema (
-            name = "dataCriacao",
-            description = "Data da criação do item no banco de dados.",
-            example = "875ABF4543",
-            required = true
-    )
-    private LocalDateTime dataCriacao;
 }

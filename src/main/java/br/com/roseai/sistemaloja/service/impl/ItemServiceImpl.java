@@ -35,21 +35,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item save(ItemDTO itemDTO) {
-        var item = this.toItem(itemDTO);
-        item.setDataCriacao(LocalDateTime.now());
+    public Item save(Item item) {
         log.info("Salvando o item: {} ", item);
         return repository.insert(item);
     }
 
     @Override
-    public void update(String id, ItemDTO itemDTO) {
+    public void update(String id, Item item) {
         var itemOpt = this.repository.findById(id);
         if (itemOpt.isPresent()) {
-            Item updatedItem = this.toItem(itemDTO);
-            updatedItem.setDataCriacao(itemOpt.get().getDataCriacao());
             log.info("Atualizando o item: {} ", itemOpt);
-            this.repository.save(updatedItem);
+            this.repository.save(itemOpt.get());
         }
     }
 

@@ -58,7 +58,7 @@ public interface ItemController {
                     )
             }
     )
-    public ResponseEntity<String> createItem(@RequestBody ItemDTO item);
+    public ResponseEntity<String> createItem(@RequestBody Item item);
 
     @Operation (
             summary = "Endpoint para atualização de um item.",
@@ -73,7 +73,7 @@ public interface ItemController {
                     )
             }
     )
-    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody ItemDTO item);
+    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody Item item);
 
     @Operation (
             summary = "Endpoint para exclusão de um item.",

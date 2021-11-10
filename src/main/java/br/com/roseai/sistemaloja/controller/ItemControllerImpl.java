@@ -1,7 +1,6 @@
 package br.com.roseai.sistemaloja.controller;
 
 import br.com.roseai.sistemaloja.entity.Item;
-import br.com.roseai.sistemaloja.model.ItemDTO;
 import br.com.roseai.sistemaloja.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,18 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("item/v1")
 @RequiredArgsConstructor
 public class ItemControllerImpl implements ItemController {
 
-    private final ItemService service;
+    private final ItemService itemService;
 
     @GetMapping("/{id}")
     public ResponseEntity<Item> getItem(@PathVariable String id) {
-        var itemOpt = service.findById(id);
+        var itemOpt = itemService.findById(id);
         if (itemOpt.isPresent()) {
             var item = itemOpt.get();
             return ResponseEntity.ok(item);
@@ -30,24 +28,24 @@ public class ItemControllerImpl implements ItemController {
 
     @GetMapping("/list")
     public ResponseEntity<List<Item>> getItens() {
-        return ResponseEntity.ok(service.getResumoEstoque());
+        return ResponseEntity.ok(itemService.getResumoEstoque());
     }
 
     @PostMapping()
-    public ResponseEntity<String> createItem(@RequestBody ItemDTO item) {
-        var createdItem = service.save(item);
+    public ResponseEntity<String> createItem(@RequestBody Item item) {
+        var createdItem = itemService.save(item);
         return ResponseEntity.created(URI.create("/item/" + createdItem.getCodigo())).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody ItemDTO item) {
-        service.update(id, item);
+    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody Item item) {
+        itemService.update(id, item);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteItem(@PathVariable String id) {
-        service.delete(id);
+        itemService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
