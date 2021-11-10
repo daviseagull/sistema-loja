@@ -29,15 +29,15 @@ public class VendaControllerImpl implements VendaController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/list")
+    @GetMapping("/list")
+    public ResponseEntity<List<ResumoVendaDTO>> getResumoVendas() {
+        return ResponseEntity.ok(service.getResumoVendas());
+    }
+
+    @PostMapping("")
     public ResponseEntity<String> createVenda(@RequestBody VendaDTO venda) {
         Venda createdVenda = service.save(venda);
         return ResponseEntity.created(URI.create("/venda/" + createdVenda.getId())).build();
-    }
-
-    @GetMapping("")
-    public ResponseEntity<List<ResumoVendaDTO>> getResumoVendas() {
-        return ResponseEntity.ok(service.getResumoVendas());
     }
 
 }
