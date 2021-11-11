@@ -1,13 +1,13 @@
 package br.com.roseai.sistemaloja.service.impl;
 
-import br.com.roseai.sistemaloja.model.ResumoVendaDTO;
 import br.com.roseai.sistemaloja.entity.Venda;
-import br.com.roseai.sistemaloja.model.VendaDTO;
+import br.com.roseai.sistemaloja.mapper.VendaMapper;
+import br.com.roseai.sistemaloja.model.ResumoVendaDto;
+import br.com.roseai.sistemaloja.model.VendaDto;
 import br.com.roseai.sistemaloja.repository.VendaRepository;
 import br.com.roseai.sistemaloja.service.VendaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class VendaServiceImpl implements VendaService {
 
     private final VendaRepository repository;
-    private final ModelMapper mapper;
+    private final VendaMapper vendaMapper;
 
     @Override
     public Optional<Venda> findById(String id) {
@@ -28,12 +28,10 @@ public class VendaServiceImpl implements VendaService {
     }
 
     @Override
-    public List<ResumoVendaDTO> getResumoVendas() {
+    public List<ResumoVendaDto> getResumoVendas() {
         var vendas = repository.findAll();
 
-        var resumoVenda = vendas.stream()
-                .map(this::toResumoVendaDTO)
-                .toList();
+        var resumoVenda = vendaMapper.toResumoVendaDtos(vendas);
 
         log.info("Retornando resumo de vendas: {} ", resumoVenda);
         return resumoVenda;
@@ -41,17 +39,9 @@ public class VendaServiceImpl implements VendaService {
     }
 
     @Override
-    public Venda save(VendaDTO vendaDTO) {
-        var venda = this.toVenda(vendaDTO);
+    public Venda save(VendaDto vendaDTO) {
+        var venda = vendaMapper.toVenda(vendaDTO);
         venda.setDataCriacao(LocalDateTime.now());
         return repository.save(venda);
-    }
-
-    private ResumoVendaDTO toResumoVendaDTO(Venda venda) {
-        return mapper.map(venda, ResumoVendaDTO.class);
-    }
-
-    private Venda toVenda(VendaDTO vendaDTO) {
-        return mapper.map(vendaDTO, Venda.class);
     }
 }

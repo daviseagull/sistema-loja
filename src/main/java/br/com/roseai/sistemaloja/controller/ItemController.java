@@ -1,7 +1,7 @@
 package br.com.roseai.sistemaloja.controller;
 
 import br.com.roseai.sistemaloja.entity.Item;
-import br.com.roseai.sistemaloja.model.ItemDTO;
+import br.com.roseai.sistemaloja.model.ItemDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -43,7 +43,7 @@ public interface ItemController {
                     )
             }
     )
-    public ResponseEntity<List<Item>> getItens();
+    public ResponseEntity<List<ItemDto>> getItens();
 
     @Operation (
             summary = "Endpoint para criação de um item.",
@@ -58,7 +58,7 @@ public interface ItemController {
                     )
             }
     )
-    public ResponseEntity<String> createItem(@RequestBody ItemDTO item);
+    public ResponseEntity<String> createItem(@RequestBody ItemDto item);
 
     @Operation (
             summary = "Endpoint para atualização de um item.",
@@ -73,7 +73,7 @@ public interface ItemController {
                     )
             }
     )
-    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody ItemDTO item);
+    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody ItemDto item);
 
     @Operation (
             summary = "Endpoint para exclusão de um item.",
