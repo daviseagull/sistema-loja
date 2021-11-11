@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface VendaMapper {
 
+    @Mapping(target = "dataCriacao", ignore = true)
     Venda toVenda(VendaDto vendaDto);
 
     VendaDto toVendaDto(Venda venda);
