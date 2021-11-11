@@ -51,6 +51,14 @@ public class Venda implements Serializable {
     private List<Item> itens;
 
     @Schema(
+            name = "formaPagamento",
+            description = "Forma de pagamento realizada na venda.",
+            example = "210.53",
+            required = true
+    )
+    private String formaPagamento;
+
+    @Schema(
             name = "dataCriacao",
             description = "Data de criação da venda.",
             example = "20/10/2021",

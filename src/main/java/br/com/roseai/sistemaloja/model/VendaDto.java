@@ -51,4 +51,12 @@ public class VendaDto implements Serializable {
     ))
     private List<Item> itens;
 
+    @Schema(
+            name = "formaPagamento",
+            description = "Forma de pagamento realizada na venda.",
+            example = "210.53",
+            required = true
+    )
+    private String formaPagamento;
+
 }
