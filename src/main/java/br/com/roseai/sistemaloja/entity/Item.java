@@ -5,8 +5,6 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @Builder
@@ -16,7 +14,7 @@ import java.time.LocalDateTime;
 public class Item {
 
     @Id
-    @Schema (
+    @Schema(
             name = "codigo",
             description = "Codigo do item.",
             example = "875ABF4543",
@@ -24,7 +22,7 @@ public class Item {
     )
     private String codigo;
 
-    @Schema (
+    @Schema(
             name = "nome",
             description = "Nome do item.",
             example = "Arroz 5KG",
@@ -32,7 +30,7 @@ public class Item {
     )
     private String nome;
 
-    @Schema (
+    @Schema(
             name = "preço",
             description = "Preço unitário do item.",
             example = "21.40",
@@ -40,7 +38,7 @@ public class Item {
     )
     private Double preco;
 
-    @Schema (
+    @Schema(
             name = "quantidade",
             description = "Quantidade do item no estoque.",
             example = "100",

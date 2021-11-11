@@ -1,6 +1,7 @@
 package br.com.roseai.sistemaloja.controller;
 
 import br.com.roseai.sistemaloja.entity.Item;
+import br.com.roseai.sistemaloja.model.ItemDto;
 import br.com.roseai.sistemaloja.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,18 +28,18 @@ public class ItemControllerImpl implements ItemController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Item>> getItens() {
+    public ResponseEntity<List<ItemDto>> getItens() {
         return ResponseEntity.ok(itemService.getResumoEstoque());
     }
 
     @PostMapping()
-    public ResponseEntity<String> createItem(@RequestBody Item item) {
+    public ResponseEntity<String> createItem(@RequestBody ItemDto item) {
         var createdItem = itemService.save(item);
         return ResponseEntity.created(URI.create("/item/" + createdItem.getCodigo())).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody Item item) {
+    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody ItemDto item) {
         itemService.update(id, item);
         return ResponseEntity.noContent().build();
     }

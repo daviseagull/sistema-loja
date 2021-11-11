@@ -1,8 +1,8 @@
 package br.com.roseai.sistemaloja.controller;
 
-import br.com.roseai.sistemaloja.model.ResumoVendaDTO;
 import br.com.roseai.sistemaloja.entity.Venda;
-import br.com.roseai.sistemaloja.model.VendaDTO;
+import br.com.roseai.sistemaloja.model.ResumoVendaDto;
+import br.com.roseai.sistemaloja.model.VendaDto;
 import br.com.roseai.sistemaloja.service.VendaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +29,12 @@ public class VendaControllerImpl implements VendaController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ResumoVendaDTO>> getResumoVendas() {
+    public ResponseEntity<List<ResumoVendaDto>> getResumoVendas() {
         return ResponseEntity.ok(vendaService.getResumoVendas());
     }
 
     @PostMapping("")
-    public ResponseEntity<String> createVenda(@RequestBody VendaDTO venda) {
+    public ResponseEntity<String> createVenda(@RequestBody VendaDto venda) {
         var createdVenda = vendaService.save(venda);
         return ResponseEntity.created(URI.create("/venda/" + createdVenda.getId())).build();
     }

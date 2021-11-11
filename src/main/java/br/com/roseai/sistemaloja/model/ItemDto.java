@@ -7,11 +7,17 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Getter
 @Builder
 @ToString
 @EqualsAndHashCode
-public class ItemDTO {
+public class ItemDto implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 7282080627778497789L;
 
     @Id
     @Schema(

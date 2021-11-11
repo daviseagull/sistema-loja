@@ -1,6 +1,7 @@
 package br.com.roseai.sistemaloja.controllerImpl;
 
 import br.com.roseai.sistemaloja.controller.ItemControllerImpl;
+import br.com.roseai.sistemaloja.mock.ItemDtoMock;
 import br.com.roseai.sistemaloja.mock.ItemMock;
 import br.com.roseai.sistemaloja.service.ItemService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,9 +22,9 @@ import java.net.URI;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ItemControllerImpl.class)
@@ -77,11 +78,11 @@ class ItemControllerImplTest {
 
     @Test
     void testGetItens() throws Exception {
-        var itemMock = ItemMock.buildList();
+        var itensMock = ItemDtoMock.buildList();
 
-        when(itemService.getResumoEstoque()).thenReturn(itemMock);
+        when(itemService.getResumoEstoque()).thenReturn(itensMock);
 
-        var responseExpect = writeValueAsString(itemMock).toCharArray();
+        var responseExpect = writeValueAsString(itensMock).toCharArray();
 
         var response = this.mvc.perform(
                         get("/item/v1/list")
@@ -99,9 +100,10 @@ class ItemControllerImplTest {
 
     @Test
     void testCreateItem() throws Exception {
+        var itemDto = ItemDtoMock.build();
         var item = ItemMock.build();
 
-        when(itemService.save(item)).thenReturn(item);
+        when(itemService.save(itemDto)).thenReturn(item);
 
         var responseExpect = (URI.create("/item/" + item.getCodigo())).toString().toCharArray();
 
@@ -120,9 +122,35 @@ class ItemControllerImplTest {
         assertThat(new String(response)).isNotNull().isEqualTo(new String(responseExpect));
     }
 
-    //TODO: Teste unitário metodo updateItem no ItemController
+    @Test
+    void testUpdateItem() throws Exception {
+        var itemDto = ItemDtoMock.build();
+        var itemId = "1234";
 
-    //TODO: Teste unitário metodo deleteItem no ItemController
+        doNothing().when(itemService).update(itemId, itemDto);
+
+        var response = this.mvc.perform(
+                        put("/item/v1/{id}", itemId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(writeValueAsString(itemDto))
+                                .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
+                )
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void testDeleteItem() throws Exception {
+        var itemId = "1234";
+
+        doNothing().when(itemService).delete(itemId);
+
+        var response = this.mvc.perform(
+                        delete("/item/v1/{id}", itemId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
+                )
+                .andExpect(status().isNoContent());
+    }
 
     private static String writeValueAsString(Object value) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

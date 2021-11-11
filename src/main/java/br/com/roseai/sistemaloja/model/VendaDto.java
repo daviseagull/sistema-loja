@@ -3,15 +3,23 @@ package br.com.roseai.sistemaloja.model;
 import br.com.roseai.sistemaloja.entity.Item;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Builder
 @ToString
 @EqualsAndHashCode
-public class VendaDTO {
+public class VendaDto implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 5272551353402780575L;
 
     @Schema(
             name = "id",

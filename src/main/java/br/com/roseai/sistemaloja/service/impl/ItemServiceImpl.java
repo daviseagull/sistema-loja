@@ -1,15 +1,14 @@
 package br.com.roseai.sistemaloja.service.impl;
 
 import br.com.roseai.sistemaloja.entity.Item;
-import br.com.roseai.sistemaloja.model.ItemDTO;
+import br.com.roseai.sistemaloja.mapper.ItemMapper;
+import br.com.roseai.sistemaloja.model.ItemDto;
 import br.com.roseai.sistemaloja.repository.ItemRepository;
 import br.com.roseai.sistemaloja.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,11 +18,13 @@ import java.util.Optional;
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository repository;
-    private final ModelMapper mapper;
+    private final ItemMapper itemMapper;
 
     @Override
-    public List<Item> getResumoEstoque() {
-        var resumoEstoque = repository.findAll();
+    public List<ItemDto> getResumoEstoque() {
+        var itens = repository.findAll();
+        var resumoEstoque = itemMapper.toItemDtos(itens);
+
         log.info("Retornando lista de itens: {} ", resumoEstoque);
         return resumoEstoque;
     }
@@ -35,17 +36,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item save(Item item) {
+    public Item save(ItemDto item) {
         log.info("Salvando o item: {} ", item);
-        return repository.insert(item);
+        return repository.insert(itemMapper.toItem(item));
     }
 
     @Override
-    public void update(String id, Item item) {
+    public void update(String id, ItemDto item) {
         var itemOpt = this.repository.findById(id);
         if (itemOpt.isPresent()) {
-            log.info("Atualizando o item: {} ", itemOpt);
-            this.repository.save(itemOpt.get());
+            log.info("Atualizando o item: {} ", item);
+            this.repository.save(itemMapper.toItem(item));
         }
     }
 
@@ -58,10 +59,6 @@ public class ItemServiceImpl implements ItemService {
         } else {
             log.error("Item com id: {} não encontrado.", itemId);
         }
-    }
-
-    private Item toItem(ItemDTO itemDTO) {
-        return mapper.map(itemDTO, Item.class);
     }
 
 }
