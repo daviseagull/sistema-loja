@@ -20,7 +20,7 @@ public class SaleSummaryResponse implements Serializable {
 
     @Schema(
             name = "id",
-            description = "Código único da venda.",
+            description = "Sale's id.",
             example = "543234",
             required = true
     )
@@ -28,21 +28,21 @@ public class SaleSummaryResponse implements Serializable {
 
     @Schema(
             name = "name",
-            description = "Nome do cliente que realizou a venda.",
+            description = "Customer's name.",
             required = true
     )
     private String name;
 
     @Schema(
             name = "cpf",
-            description = "CPF do cliente que realizou a venda.",
+            description = "Customer's CPF.",
             required = true
     )
     private String cpf;
 
     @Schema(
             name = "totalPrice",
-            description = "Valor total da venda.",
+            description = "Sale's total price.",
             example = "210.53",
             required = true
     )
@@ -50,7 +50,7 @@ public class SaleSummaryResponse implements Serializable {
 
     @Schema(
             name = "creationDate",
-            description = "Data de criação da venda.",
+            description = "Creation date of the sale.",
             example = "20/10/2021",
             required = true
     )

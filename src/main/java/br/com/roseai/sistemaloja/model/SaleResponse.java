@@ -25,7 +25,7 @@ public class SaleResponse implements Serializable {
 
     @Schema(
             name = "id",
-            description = "Código único da venda.",
+            description = "Sale's id.",
             example = "543234",
             required = true
     )
@@ -33,14 +33,14 @@ public class SaleResponse implements Serializable {
 
     @Schema(
             name = "customer",
-            description = "Informações do cliente.",
+            description = "Customer's information.",
             required = true
     )
     private Customer customer;
 
     @Schema(
             name = "totalPrice",
-            description = "Valor total da venda.",
+            description = "Sale's total price.",
             example = "210.53",
             required = true
     )
@@ -49,7 +49,7 @@ public class SaleResponse implements Serializable {
 
     @ArraySchema(schema = @Schema(
             name = "items",
-            description = "Array com os ids dos itens da venda.",
+            description = "Array of items id.",
             required = true
     ))
     @NotEmpty
@@ -57,7 +57,7 @@ public class SaleResponse implements Serializable {
 
     @Schema(
             name = "paymentForm",
-            description = "Forma de pagamento realizada na venda.",
+            description = "Payment form used in the sale.",
             example = "credito",
             required = true
     )

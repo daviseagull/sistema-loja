@@ -23,7 +23,7 @@ public class ItemResponse implements Serializable {
 
     @Schema(
             name = "code",
-            description = "Codigo do item.",
+            description = "Item's code.",
             example = "875ABF4543",
             required = true
     )
@@ -32,8 +32,8 @@ public class ItemResponse implements Serializable {
 
     @Schema(
             name = "name",
-            description = "Nome do item.",
-            example = "Arroz 5KG",
+            description = "Item's name.",
+            example = "Rice 5KG",
             required = true
     )
     @NotBlank
@@ -41,7 +41,7 @@ public class ItemResponse implements Serializable {
 
     @Schema(
             name = "price",
-            description = "Preço unitário do item.",
+            description = "Item's price.",
             example = "21.40",
             required = true
     )
@@ -50,7 +50,7 @@ public class ItemResponse implements Serializable {
 
     @Schema(
             name = "quantity",
-            description = "Quantidade do item no estoque.",
+            description = "Item's quantity.",
             example = "100",
             required = true
     )

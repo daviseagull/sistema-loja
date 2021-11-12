@@ -22,7 +22,7 @@ public class Sale implements Serializable {
     @Id
     @Schema(
             name = "id",
-            description = "Código único da venda.",
+            description = "Sale's id.",
             example = "543234",
             required = true
     )
@@ -30,14 +30,14 @@ public class Sale implements Serializable {
 
     @Schema(
             name = "customer",
-            description = "Informações do cliente.",
+            description = "Customer information.",
             required = true
     )
     private Customer customer;
 
     @Schema(
             name = "totalPrice",
-            description = "Valor total da venda.",
+            description = "Sale's total price.",
             example = "210.53",
             required = true
     )
@@ -45,14 +45,14 @@ public class Sale implements Serializable {
 
     @ArraySchema(schema = @Schema(
             name = "items",
-            description = "Array com os itens da venda.",
+            description = "Array of items id.",
             required = true
     ))
     private List<String> items;
 
     @Schema(
             name = "paymentForm",
-            description = "Forma de pagamento realizada na venda.",
+            description = "Payment form used in the sale.",
             example = "credito",
             required = true
     )
@@ -60,7 +60,7 @@ public class Sale implements Serializable {
 
     @Schema(
             name = "creationDate",
-            description = "Data de criação da venda.",
+            description = "Creation date of the sale.",
             example = "20/10/2021",
             required = true
     )

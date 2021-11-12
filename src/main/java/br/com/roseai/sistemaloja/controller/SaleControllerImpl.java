@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("venda/v1")
+@RequestMapping("sale/v1")
 @RequiredArgsConstructor
 public class SaleControllerImpl implements SaleController {
 

@@ -18,8 +18,8 @@ public class SwaggerConfig {
     private Info getInfo() {
         var license = getLicense();
         return new Info()
-                .title("API Sistema Loja")
-                .description("API responsável pelos dados do sistema de controle de estoque e vendas.")
+                .title("API Store System")
+                .description("API responsible for the data of the sales and inventory control system.")
                 .version("1.0.0-SNAPSHOT")
                 .license(license);
     }

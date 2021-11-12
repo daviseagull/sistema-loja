@@ -16,7 +16,7 @@ public class Item {
     @Id
     @Schema(
             name = "code",
-            description = "Codigo do item.",
+            description = "Item's code.",
             example = "875ABF4543",
             required = true
     )
@@ -24,7 +24,7 @@ public class Item {
 
     @Schema(
             name = "name",
-            description = "Nome do item.",
+            description = "Item's name.",
             example = "Arroz 5KG",
             required = true
     )
@@ -32,7 +32,7 @@ public class Item {
 
     @Schema(
             name = "active",
-            description = "campo usado para filtrar os itens ativos (quantidade > 0)",
+            description = "Attribute used to filter the items that have more than 0 in quantity.",
             example = "true",
             required = true
     )
@@ -40,7 +40,7 @@ public class Item {
 
     @Schema(
             name = "price",
-            description = "Preço unitário do item.",
+            description = "Item's price.",
             example = "21.40",
             required = true
     )
@@ -48,7 +48,7 @@ public class Item {
 
     @Schema(
             name = "quantity",
-            description = "Quantidade do item no estoque.",
+            description = "Item's quantity in inventory.",
             example = "100",
             required = true
     )

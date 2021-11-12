@@ -29,11 +29,11 @@ public class ItemControllerImpl implements ItemController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ItemResponse>> getItemList() {
+    public ResponseEntity<List<ItemResponse>> getInventory() {
         return ResponseEntity.ok(itemService.getInventory());
     }
 
-    @GetMapping("/list/ativos")
+    @GetMapping("/list/active")
     public ResponseEntity<List<ItemResponse>> getActiveItems() {
         return ResponseEntity.ok(itemService.getActiveItemList());
     }

@@ -20,14 +20,14 @@ public class Customer implements Serializable {
 
     @Schema(
             name = "cpf",
-            description = "CPF do cliente que realizou a venda.",
+            description = "Customer's CPF.",
             required = true
     )
     private String cpf;
 
     @Schema(
             name = "name",
-            description = "Nome do cliente que realizou a venda.",
+            description = "Customer's name.",
             required = true
     )
     private String name;

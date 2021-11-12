@@ -17,10 +17,10 @@ import java.util.List;
 public interface SaleController {
 
     @Operation(
-            summary = "Endpoint para retorno de uma venda.",
+            summary = "Endpoint used to return an item.",
             responses = {
                     @ApiResponse(
-                            description = "Dados obtidos com sucesso.",
+                            description = "Data obtained successfully.",
                             responseCode = "200",
                             content = @Content(
                                     mediaType = "application/json",
@@ -32,10 +32,10 @@ public interface SaleController {
     public ResponseEntity<SaleResponse> getSale(@PathVariable String id);
 
     @Operation(
-            summary = "Endpoint para retorno dos resumos das vendas.",
+            summary = "Endpoint used to return sales summaries.",
             responses = {
                     @ApiResponse(
-                            description = "Dados obtidos com sucesso.",
+                            description = "Data obtained successfully.",
                             responseCode = "200",
                             content = @Content(
                                     mediaType = "application/json",
@@ -47,10 +47,10 @@ public interface SaleController {
     public ResponseEntity<List<SaleSummaryResponse>> getSaleSummaryList();
 
     @Operation(
-            summary = "Endpoint para criação de uma venda.",
+            summary = "Endpoint used to create a sale.",
             responses = {
                     @ApiResponse(
-                            description = "Dados obtidos com sucesso.",
+                            description = "Data obtained successfully.",
                             responseCode = "200",
                             content = @Content(
                                     mediaType = "application/json",

@@ -17,10 +17,10 @@ import java.util.List;
 public interface ItemController {
 
     @Operation(
-            summary = "Endpoint para retorno de um item.",
+            summary = "Endpoint used to return an item.",
             responses = {
                     @ApiResponse(
-                            description = "Dados obtidos com sucesso.",
+                            description = "Data obtained successfully.",
                             responseCode = "200",
                             content = @Content(
                                     mediaType = "application/json",
@@ -32,10 +32,10 @@ public interface ItemController {
     public ResponseEntity<ItemResponse> getItem(@PathVariable String id);
 
     @Operation(
-            summary = "Endpoint para retorno de todos itens.",
+            summary = "Endpoint used to return all items in inventory.",
             responses = {
                     @ApiResponse(
-                            description = "Dados obtidos com sucesso.",
+                            description = "Data obtained successfully.",
                             responseCode = "200",
                             content = @Content(
                                     mediaType = "application/json",
@@ -44,13 +44,13 @@ public interface ItemController {
                     )
             }
     )
-    public ResponseEntity<List<ItemResponse>> getItemList();
+    public ResponseEntity<List<ItemResponse>> getInventory();
 
     @Operation(
-            summary = "Endpoint para retorno de todos itens ativos.",
+            summary = "Endpoint used to return all active items..",
             responses = {
                     @ApiResponse(
-                            description = "Dados obtidos com sucesso.",
+                            description = "Data obtained successfully.",
                             responseCode = "200",
                             content = @Content(
                                     mediaType = "application/json",
@@ -62,10 +62,10 @@ public interface ItemController {
     public ResponseEntity<List<ItemResponse>> getActiveItems();
 
     @Operation(
-            summary = "Endpoint para criação de um item.",
+            summary = "Endpoint used to create an item.",
             responses = {
                     @ApiResponse(
-                            description = "Item criado com sucesso.",
+                            description = "Item created successfully.",
                             responseCode = "200",
                             content = @Content(
                                     mediaType = "application/json",
@@ -77,10 +77,10 @@ public interface ItemController {
     public ResponseEntity<String> createItem(@RequestBody ItemDto item);
 
     @Operation(
-            summary = "Endpoint para atualização de um item.",
+            summary = "Endpoint used to update an item.",
             responses = {
                     @ApiResponse(
-                            description = "Item atualizado com sucesso.",
+                            description = "Item updated succesfully.",
                             responseCode = "200",
                             content = @Content(
                                     mediaType = "application/json",
@@ -92,7 +92,7 @@ public interface ItemController {
     public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody ItemDto item);
 
     @Operation(
-            summary = "Endpoint para exclusão de um item.",
+            summary = "Endpoint used to delete an item.",
             responses = {
                     @ApiResponse(
                             description = "Item excluido com sucesso.",
