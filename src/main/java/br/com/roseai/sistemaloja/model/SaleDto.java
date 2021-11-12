@@ -24,19 +24,18 @@ public class SaleDto implements Serializable {
     private static final long serialVersionUID = 5272551353402780575L;
 
     @Schema(
-            name = "id",
-            description = "Sale's id.",
-            example = "543234",
-            required = true
-    )
-    private String id;
-
-    @Schema(
-            name = "customer",
+            name = "customerName",
             description = "Customer's information.",
             required = true
     )
-    private Customer customer;
+    private String customerName;
+
+    @Schema(
+            name = "customerCpf",
+            description = "Customer's CPF.",
+            required = true
+    )
+    private String customerCpf;
 
     @Schema(
             name = "totalPrice",

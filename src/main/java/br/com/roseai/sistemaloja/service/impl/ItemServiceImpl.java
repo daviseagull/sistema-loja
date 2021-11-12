@@ -22,18 +22,6 @@ public class ItemServiceImpl implements ItemService {
     private final ItemMapper itemMapper;
 
     @Override
-    public List<ItemResponse> getInventory() {
-
-        var itemList = repository.findAll();
-
-        log.info("Mapeando lista para itemDto: {}", itemList);
-        var inventory = itemMapper.toItemResponses(itemList);
-
-        log.info("Retornando lista de itens: {} ", inventory);
-        return inventory;
-    }
-
-    @Override
     public List<ItemResponse> getActiveItemList() {
         var activeItemList = repository.findAllByActiveIsTrue();
 

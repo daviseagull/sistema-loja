@@ -10,8 +10,6 @@ public interface ItemService {
 
     List<ItemResponse> getInventory();
 
-    ItemResponse findById(String itemId);
-
     Item save(ItemDto item);
 
     void saveAfterSell(String itemId);

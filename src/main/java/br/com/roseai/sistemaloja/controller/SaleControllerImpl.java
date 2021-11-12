@@ -23,6 +23,7 @@ public class SaleControllerImpl implements SaleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SaleResponse> getSale(@PathVariable String id) {
+        //TODO: Retornar os objetos dos itens
         if (StringUtils.isBlank(id))
             throw new BadRequestException("Id não pode ser nulo.");
 

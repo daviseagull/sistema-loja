@@ -17,21 +17,6 @@ import java.util.List;
 public interface ItemController {
 
     @Operation(
-            summary = "Endpoint used to return an item.",
-            responses = {
-                    @ApiResponse(
-                            description = "Data obtained successfully.",
-                            responseCode = "200",
-                            content = @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = Item.class)
-                            )
-                    )
-            }
-    )
-    public ResponseEntity<ItemResponse> getItem(@PathVariable String id);
-
-    @Operation(
             summary = "Endpoint used to return all items in inventory.",
             responses = {
                     @ApiResponse(

@@ -8,8 +8,8 @@ public class SaleDtoMock {
 
     public static SaleDto build() {
         return br.com.roseai.sistemaloja.model.SaleDto.builder()
-                .customer(ClienteMock.build())
-                .id("1234")
+                .customerCpf(ClienteMock.CPF)
+                .customerName(ClienteMock.NAME)
                 .items(List.of("1234"))
                 .totalPrice(12.34)
                 .paymentForm("credito")

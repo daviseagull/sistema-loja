@@ -20,14 +20,6 @@ public class ItemControllerImpl implements ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ItemResponse> getItem(@PathVariable String id) {
-        if (StringUtils.isBlank(id))
-            throwBadRequestException();
-
-        return ResponseEntity.ok(itemService.findById(id));
-    }
-
     @GetMapping("/list")
     public ResponseEntity<List<ItemResponse>> getInventory() {
         return ResponseEntity.ok(itemService.getInventory());

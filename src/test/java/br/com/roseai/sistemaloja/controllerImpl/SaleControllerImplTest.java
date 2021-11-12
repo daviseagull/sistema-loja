@@ -63,7 +63,7 @@ class SaleControllerImplTest {
         var responseExpect = writeValueAsString(vendaMock).toCharArray();
 
         var response = this.mvc.perform(
-                        get("/venda/v1/{id}", vendaId)
+                        get("/sale/v1/{id}", vendaId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
                 )
@@ -85,7 +85,7 @@ class SaleControllerImplTest {
         var responseExpect = writeValueAsString(resumoVendaDtos).toCharArray();
 
         var response = this.mvc.perform(
-                        get("/venda/v1/list")
+                        get("/sale/v1/list")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
                 )
@@ -106,7 +106,7 @@ class SaleControllerImplTest {
         when(saleService.save(vendaDto)).thenReturn(venda);
 
         this.mvc.perform(
-                        post("/venda/v1")
+                        post("/sale/v1")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(writeValueAsString(venda))
                                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
