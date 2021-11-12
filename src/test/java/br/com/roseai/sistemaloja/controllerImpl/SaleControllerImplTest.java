@@ -3,6 +3,7 @@ package br.com.roseai.sistemaloja.controllerImpl;
 import br.com.roseai.sistemaloja.controller.SaleControllerImpl;
 import br.com.roseai.sistemaloja.mock.SaleDtoMock;
 import br.com.roseai.sistemaloja.mock.SaleMock;
+import br.com.roseai.sistemaloja.mock.SaleResponseMock;
 import br.com.roseai.sistemaloja.mock.SaleSummaryDtoMock;
 import br.com.roseai.sistemaloja.service.SaleService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -55,7 +56,7 @@ class SaleControllerImplTest {
     @Test
     void testGetVenda() throws Exception {
         var vendaId = "1234";
-        var vendaMock = SaleMock.build();
+        var vendaMock = SaleResponseMock.build();
 
         when(saleService.findById(vendaId)).thenReturn(vendaMock);
 

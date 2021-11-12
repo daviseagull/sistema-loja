@@ -2,6 +2,7 @@ package br.com.roseai.sistemaloja.mapper;
 
 import br.com.roseai.sistemaloja.entity.Item;
 import br.com.roseai.sistemaloja.model.ItemDto;
+import br.com.roseai.sistemaloja.model.ItemResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -15,6 +16,8 @@ public interface ItemMapper {
     @Mapping(target = "active", constant = "true")
     Item toItem(ItemDto itemDto);
 
-    List<ItemDto> toItemDtos(List<Item> itens);
+    ItemResponse toItemResponse(Item item);
+
+    List<ItemResponse> toItemResponses(List<Item> itens);
 
 }

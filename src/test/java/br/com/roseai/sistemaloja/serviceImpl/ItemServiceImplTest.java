@@ -3,6 +3,7 @@ package br.com.roseai.sistemaloja.serviceImpl;
 import br.com.roseai.sistemaloja.mapper.ItemMapper;
 import br.com.roseai.sistemaloja.mock.ItemDtoMock;
 import br.com.roseai.sistemaloja.mock.ItemMock;
+import br.com.roseai.sistemaloja.mock.ItemResponseMock;
 import br.com.roseai.sistemaloja.repository.ItemRepository;
 import br.com.roseai.sistemaloja.service.impl.ItemServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -27,12 +28,12 @@ class ItemServiceImplTest {
     private ItemServiceImpl itemService;
 
     @Test
-    void testGetResumoEstoque() {
-        var itens = ItemMock.buildList();
-        var itemDtos = ItemDtoMock.buildList();
+    void testGetInventory() {
+        var items = ItemMock.buildList();
+        var itemDtos = ItemResponseMock.buildList();
 
-        when(itemRepository.findAll()).thenReturn(itens);
-        when(itemMapper.toItemDtos(itens)).thenReturn(itemDtos);
+        when(itemRepository.findAll()).thenReturn(items);
+        when(itemMapper.toItemResponses(items)).thenReturn(itemDtos);
 
         var result = itemService.getInventory();
 
@@ -44,14 +45,14 @@ class ItemServiceImplTest {
         var itemId = "1234";
         var itemOpt = ItemMock.buildOpt();
         var item = ItemMock.build();
-        var itemDto = ItemDtoMock.build();
+        var itemResponse = ItemResponseMock.build();
 
         when(itemRepository.findById(itemId)).thenReturn(itemOpt);
-        when(itemMapper.toItemDto(item)).thenReturn(itemDto);
+        when(itemMapper.toItemResponse(item)).thenReturn(itemResponse);
 
         var result = itemService.findById(itemId);
 
-        assertThat(result).isEqualTo(itemDto);
+        assertThat(result).isEqualTo(itemResponse);
     }
 
     @Test

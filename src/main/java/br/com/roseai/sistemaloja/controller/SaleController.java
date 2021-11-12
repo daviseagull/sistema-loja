@@ -1,9 +1,9 @@
 package br.com.roseai.sistemaloja.controller;
 
 import br.com.roseai.sistemaloja.entity.Item;
-import br.com.roseai.sistemaloja.entity.Sale;
 import br.com.roseai.sistemaloja.model.SaleDto;
-import br.com.roseai.sistemaloja.model.SaleSummaryDto;
+import br.com.roseai.sistemaloja.model.SaleResponse;
+import br.com.roseai.sistemaloja.model.SaleSummaryResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +29,7 @@ public interface SaleController {
                     )
             }
     )
-    public ResponseEntity<Sale> getSale(@PathVariable String id);
+    public ResponseEntity<SaleResponse> getSale(@PathVariable String id);
 
     @Operation(
             summary = "Endpoint para retorno dos resumos das vendas.",
@@ -44,7 +44,7 @@ public interface SaleController {
                     )
             }
     )
-    public ResponseEntity<List<SaleSummaryDto>> getSaleSummaryList();
+    public ResponseEntity<List<SaleSummaryResponse>> getSaleSummaryList();
 
     @Operation(
             summary = "Endpoint para criação de uma venda.",

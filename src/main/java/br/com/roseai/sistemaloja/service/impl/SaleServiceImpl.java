@@ -4,7 +4,8 @@ import br.com.roseai.sistemaloja.entity.Sale;
 import br.com.roseai.sistemaloja.exception.EmptyOptionalException;
 import br.com.roseai.sistemaloja.mapper.SaleMapper;
 import br.com.roseai.sistemaloja.model.SaleDto;
-import br.com.roseai.sistemaloja.model.SaleSummaryDto;
+import br.com.roseai.sistemaloja.model.SaleResponse;
+import br.com.roseai.sistemaloja.model.SaleSummaryResponse;
 import br.com.roseai.sistemaloja.repository.SaleRepository;
 import br.com.roseai.sistemaloja.service.ItemService;
 import br.com.roseai.sistemaloja.service.SaleService;
@@ -24,14 +25,18 @@ public class SaleServiceImpl implements SaleService {
     private final SaleMapper saleMapper;
 
     @Override
-    public Sale findById(String id) {
-        return saleRepository.findById(id).stream()
+    public SaleResponse findById(String id) {
+
+        log.info("buscando venda com id: {} ", id);
+
+        var sale = saleRepository.findById(id).stream()
                 .findFirst()
                 .orElseThrow(() -> new EmptyOptionalException(vendaNotFoundMessage(id)));
+        return saleMapper.toSaleResponse(sale);
     }
 
     @Override
-    public List<SaleSummaryDto> getSaleSummaryList() {
+    public List<SaleSummaryResponse> getSaleSummaryList() {
         var saleList = saleRepository.findAll();
 
         var saleSummaryList = saleMapper.toResumoVendaDtos(saleList);

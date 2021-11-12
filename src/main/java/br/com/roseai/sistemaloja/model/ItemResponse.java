@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Builder
 @ToString
 @EqualsAndHashCode
-public class ItemDto implements Serializable {
+public class ItemResponse implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 7282080627778497789L;

@@ -3,6 +3,7 @@ package br.com.roseai.sistemaloja.serviceImpl;
 import br.com.roseai.sistemaloja.mapper.SaleMapper;
 import br.com.roseai.sistemaloja.mock.SaleDtoMock;
 import br.com.roseai.sistemaloja.mock.SaleMock;
+import br.com.roseai.sistemaloja.mock.SaleResponseMock;
 import br.com.roseai.sistemaloja.mock.SaleSummaryDtoMock;
 import br.com.roseai.sistemaloja.repository.SaleRepository;
 import br.com.roseai.sistemaloja.service.impl.ItemServiceImpl;
@@ -34,42 +35,44 @@ class SaleServiceImplTest {
 
     @Test
     void testFindById() {
-        var vendaId = "1234";
-        var vendaOpt = SaleMock.buildOpt();
-        var venda = SaleMock.build();
+        var saleId = "1234";
+        var saleOpt = SaleMock.buildOpt();
+        var sale = SaleMock.build();
+        var saleResponse = SaleResponseMock.build();
 
-        when(saleRepository.findById(vendaId)).thenReturn(vendaOpt);
+        when(saleRepository.findById(saleId)).thenReturn(saleOpt);
+        when(saleMapper.toSaleResponse(sale)).thenReturn(saleResponse);
 
-        var result = vendaService.findById(vendaId);
+        var result = vendaService.findById(saleId);
 
-        assertThat(result).isEqualTo(venda);
+        assertThat(result).isEqualTo(saleResponse);
     }
 
     @Test
-    void testGetResumoVendas() {
-        var vendas = SaleMock.buildList();
-        var resumoVendas = SaleSummaryDtoMock.buildList();
+    void testGetSaleSummaryList() {
+        var sales = SaleMock.buildList();
+        var saleSummaryResponses = SaleSummaryDtoMock.buildList();
 
-        when(saleRepository.findAll()).thenReturn(vendas);
-        when(saleMapper.toResumoVendaDtos(vendas)).thenReturn(resumoVendas);
+        when(saleRepository.findAll()).thenReturn(sales);
+        when(saleMapper.toResumoVendaDtos(sales)).thenReturn(saleSummaryResponses);
 
         var result = vendaService.getSaleSummaryList();
 
-        assertThat(result).isEqualTo(resumoVendas);
+        assertThat(result).isEqualTo(saleSummaryResponses);
     }
 
     @Test
     void testSave() {
-        var vendaDto = SaleDtoMock.build();
-        var venda = SaleMock.build();
+        var saleDto = SaleDtoMock.build();
+        var sale = SaleMock.build();
         var itemId = "1234";
 
-        when(saleMapper.toVenda(vendaDto)).thenReturn(venda);
+        when(saleMapper.toVenda(saleDto)).thenReturn(sale);
         doNothing().when(itemService).saveAfterSell(itemId);
-        when(saleRepository.save(venda)).thenReturn(venda);
+        when(saleRepository.save(sale)).thenReturn(sale);
 
-        var result = vendaService.save(vendaDto);
+        var result = vendaService.save(saleDto);
 
-        assertThat(result).isEqualTo(venda);
+        assertThat(result).isEqualTo(sale);
     }
 }

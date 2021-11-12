@@ -4,6 +4,7 @@ import br.com.roseai.sistemaloja.entity.Item;
 import br.com.roseai.sistemaloja.exception.EmptyOptionalException;
 import br.com.roseai.sistemaloja.mapper.ItemMapper;
 import br.com.roseai.sistemaloja.model.ItemDto;
+import br.com.roseai.sistemaloja.model.ItemResponse;
 import br.com.roseai.sistemaloja.repository.ItemRepository;
 import br.com.roseai.sistemaloja.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -21,23 +22,23 @@ public class ItemServiceImpl implements ItemService {
     private final ItemMapper itemMapper;
 
     @Override
-    public List<ItemDto> getInventory() {
+    public List<ItemResponse> getInventory() {
 
         var itemList = repository.findAll();
 
         log.info("Mapeando lista para itemDto: {}", itemList);
-        var inventory = itemMapper.toItemDtos(itemList);
+        var inventory = itemMapper.toItemResponses(itemList);
 
         log.info("Retornando lista de itens: {} ", inventory);
         return inventory;
     }
 
     @Override
-    public List<ItemDto> getActiveItemList() {
+    public List<ItemResponse> getActiveItemList() {
         var activeItemList = repository.findAllByActiveIsTrue();
 
         log.info("Mapeando lista para itemDto: {}", activeItemList);
-        var itemDtoList = itemMapper.toItemDtos(activeItemList);
+        var itemDtoList = itemMapper.toItemResponses(activeItemList);
 
         log.info("Retornando lista de itens: {} ", itemDtoList);
         return itemDtoList;
@@ -45,14 +46,14 @@ public class ItemServiceImpl implements ItemService {
 
 
     @Override
-    public ItemDto findById(String itemId) {
+    public ItemResponse findById(String itemId) {
         log.info("buscando item com id: {} ", itemId);
 
         var item = repository.findById(itemId).stream()
                 .findFirst()
                 .orElseThrow(() -> new EmptyOptionalException(itemNotFoundMessage(itemId)));
 
-        return itemMapper.toItemDto(item);
+        return itemMapper.toItemResponse(item);
     }
 
     @Override
@@ -87,7 +88,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void saveAfterSell(String itemId) {
 
-        var item = itemMapper.toItem(findById(itemId));
+        var item = itemMapper.toItem(findDtoById(itemId));
 
         var itemNewQuantity = item.getQuantity() - 1;
 
@@ -97,6 +98,17 @@ public class ItemServiceImpl implements ItemService {
         item.setQuantity(itemNewQuantity);
 
         repository.save(item);
+    }
+
+    @Override
+    public ItemDto findDtoById(String itemId) {
+        log.info("buscando item com id: {} ", itemId);
+
+        var item = repository.findById(itemId).stream()
+                .findFirst()
+                .orElseThrow(() -> new EmptyOptionalException(itemNotFoundMessage(itemId)));
+
+        return itemMapper.toItemDto(item);
     }
 
     public String itemNotFoundMessage(String itemId) {

@@ -3,6 +3,7 @@ package br.com.roseai.sistemaloja.controllerImpl;
 import br.com.roseai.sistemaloja.controller.ItemControllerImpl;
 import br.com.roseai.sistemaloja.mock.ItemDtoMock;
 import br.com.roseai.sistemaloja.mock.ItemMock;
+import br.com.roseai.sistemaloja.mock.ItemResponseMock;
 import br.com.roseai.sistemaloja.service.ItemService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,7 +55,7 @@ class ItemControllerImplTest {
     @Test
     void testGetItem() throws Exception {
         var itemId = "1234";
-        var itemMock = ItemDtoMock.build();
+        var itemMock = ItemResponseMock.build();
 
         when(itemService.findById(itemId)).thenReturn(itemMock);
 
@@ -75,12 +76,12 @@ class ItemControllerImplTest {
     }
 
     @Test
-    void testGetItens() throws Exception {
-        var itensMock = ItemDtoMock.buildList();
+    void testGetItems() throws Exception {
+        var itemResponses = ItemResponseMock.buildList();
 
-        when(itemService.getInventory()).thenReturn(itensMock);
+        when(itemService.getInventory()).thenReturn(itemResponses);
 
-        var responseExpect = writeValueAsString(itensMock).toCharArray();
+        var responseExpect = writeValueAsString(itemResponses).toCharArray();
 
         var response = this.mvc.perform(
                         get("/item/v1/list")

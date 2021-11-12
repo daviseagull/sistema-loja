@@ -1,7 +1,7 @@
 package br.com.roseai.sistemaloja.mock;
 
 import br.com.roseai.sistemaloja.model.Customer;
-import br.com.roseai.sistemaloja.model.SaleSummaryDto;
+import br.com.roseai.sistemaloja.model.SaleSummaryResponse;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ public class SaleSummaryDtoMock {
 
     public static final Customer CUSTOMER = ClienteMock.build();
 
-    public static SaleSummaryDto build() {
+    public static SaleSummaryResponse build() {
 
-        return SaleSummaryDto.builder()
+        return SaleSummaryResponse.builder()
                 .cpf(CUSTOMER.getCpf())
                 .name(CUSTOMER.getName())
                 .id("1234")
@@ -19,9 +19,9 @@ public class SaleSummaryDtoMock {
                 .build();
     }
 
-    public static List<SaleSummaryDto> buildList() {
+    public static List<SaleSummaryResponse> buildList() {
 
-        return List.of(SaleSummaryDto.builder()
+        return List.of(SaleSummaryResponse.builder()
                 .cpf(CUSTOMER.getCpf())
                 .name(CUSTOMER.getName())
                 .id("1234")

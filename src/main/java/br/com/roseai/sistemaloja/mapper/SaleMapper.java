@@ -2,7 +2,8 @@ package br.com.roseai.sistemaloja.mapper;
 
 import br.com.roseai.sistemaloja.entity.Sale;
 import br.com.roseai.sistemaloja.model.SaleDto;
-import br.com.roseai.sistemaloja.model.SaleSummaryDto;
+import br.com.roseai.sistemaloja.model.SaleResponse;
+import br.com.roseai.sistemaloja.model.SaleSummaryResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -16,9 +17,11 @@ public interface SaleMapper {
 
     @Mapping(target = "cpf", source = "customer.cpf")
     @Mapping(target = "name", source = "customer.name")
-    SaleSummaryDto toResumoVendaDto(Sale sale);
+    SaleSummaryResponse toResumoVendaDto(Sale sale);
 
-    List<SaleSummaryDto> toResumoVendaDtos(List<Sale> sales);
+    SaleResponse toSaleResponse(Sale sale);
+
+    List<SaleSummaryResponse> toResumoVendaDtos(List<Sale> sales);
 }
 
 

@@ -2,6 +2,7 @@ package br.com.roseai.sistemaloja.controller;
 
 import br.com.roseai.sistemaloja.exception.BadRequestException;
 import br.com.roseai.sistemaloja.model.ItemDto;
+import br.com.roseai.sistemaloja.model.ItemResponse;
 import br.com.roseai.sistemaloja.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +21,7 @@ public class ItemControllerImpl implements ItemController {
     private final ItemService itemService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ItemDto> getItem(@PathVariable String id) {
+    public ResponseEntity<ItemResponse> getItem(@PathVariable String id) {
         if (StringUtils.isBlank(id))
             throwBadRequestException();
 
@@ -28,12 +29,12 @@ public class ItemControllerImpl implements ItemController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ItemDto>> getItemList() {
+    public ResponseEntity<List<ItemResponse>> getItemList() {
         return ResponseEntity.ok(itemService.getInventory());
     }
 
     @GetMapping("/list/ativos")
-    public ResponseEntity<List<ItemDto>> getActiveItems() {
+    public ResponseEntity<List<ItemResponse>> getActiveItems() {
         return ResponseEntity.ok(itemService.getActiveItemList());
     }
 

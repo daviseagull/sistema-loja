@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Builder
 @ToString
 @EqualsAndHashCode
-public class SaleSummaryDto implements Serializable {
+public class SaleSummaryResponse implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -6428679363338689247L;

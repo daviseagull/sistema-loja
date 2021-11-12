@@ -2,14 +2,15 @@ package br.com.roseai.sistemaloja.service;
 
 import br.com.roseai.sistemaloja.entity.Item;
 import br.com.roseai.sistemaloja.model.ItemDto;
+import br.com.roseai.sistemaloja.model.ItemResponse;
 
 import java.util.List;
 
 public interface ItemService {
 
-    List<ItemDto> getInventory();
+    List<ItemResponse> getInventory();
 
-    ItemDto findById(String itemId);
+    ItemResponse findById(String itemId);
 
     Item save(ItemDto item);
 
@@ -19,5 +20,7 @@ public interface ItemService {
 
     void delete(String itemId);
 
-    List<ItemDto> getActiveItemList();
+    ItemDto findDtoById(String itemId);
+
+    List<ItemResponse> getActiveItemList();
 }

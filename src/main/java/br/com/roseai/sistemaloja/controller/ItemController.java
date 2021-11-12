@@ -2,6 +2,7 @@ package br.com.roseai.sistemaloja.controller;
 
 import br.com.roseai.sistemaloja.entity.Item;
 import br.com.roseai.sistemaloja.model.ItemDto;
+import br.com.roseai.sistemaloja.model.ItemResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,7 +29,7 @@ public interface ItemController {
                     )
             }
     )
-    public ResponseEntity<ItemDto> getItem(@PathVariable String id);
+    public ResponseEntity<ItemResponse> getItem(@PathVariable String id);
 
     @Operation(
             summary = "Endpoint para retorno de todos itens.",
@@ -43,7 +44,22 @@ public interface ItemController {
                     )
             }
     )
-    public ResponseEntity<List<ItemDto>> getItemList();
+    public ResponseEntity<List<ItemResponse>> getItemList();
+
+    @Operation(
+            summary = "Endpoint para retorno de todos itens ativos.",
+            responses = {
+                    @ApiResponse(
+                            description = "Dados obtidos com sucesso.",
+                            responseCode = "200",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = Item.class))
+                            )
+                    )
+            }
+    )
+    public ResponseEntity<List<ItemResponse>> getActiveItems();
 
     @Operation(
             summary = "Endpoint para criação de um item.",

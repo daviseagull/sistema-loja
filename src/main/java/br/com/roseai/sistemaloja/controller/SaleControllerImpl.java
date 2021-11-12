@@ -1,9 +1,9 @@
 package br.com.roseai.sistemaloja.controller;
 
-import br.com.roseai.sistemaloja.entity.Sale;
 import br.com.roseai.sistemaloja.exception.BadRequestException;
 import br.com.roseai.sistemaloja.model.SaleDto;
-import br.com.roseai.sistemaloja.model.SaleSummaryDto;
+import br.com.roseai.sistemaloja.model.SaleResponse;
+import br.com.roseai.sistemaloja.model.SaleSummaryResponse;
 import br.com.roseai.sistemaloja.service.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +22,7 @@ public class SaleControllerImpl implements SaleController {
     private final SaleService saleService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Sale> getSale(@PathVariable String id) {
+    public ResponseEntity<SaleResponse> getSale(@PathVariable String id) {
         if (StringUtils.isBlank(id))
             throw new BadRequestException("Id não pode ser nulo.");
 
@@ -30,7 +30,7 @@ public class SaleControllerImpl implements SaleController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<SaleSummaryDto>> getSaleSummaryList() {
+    public ResponseEntity<List<SaleSummaryResponse>> getSaleSummaryList() {
         return ResponseEntity.ok(saleService.getSaleSummaryList());
     }
 
