@@ -22,6 +22,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto> getResumoEstoque() {
+
         var itens = repository.findAll();
 
         log.info("Mapeando lista para itemDto: {}", itens);
@@ -30,6 +31,18 @@ public class ItemServiceImpl implements ItemService {
         log.info("Retornando lista de itens: {} ", resumoEstoque);
         return resumoEstoque;
     }
+
+    @Override
+    public List<ItemDto> getActiveItems() {
+        var activeItems = repository.findAllByActiveIsTrue();
+
+        log.info("Mapeando lista para itemDto: {}", activeItems);
+        var activeItemsDto = itemMapper.toItemDtos(activeItems);
+
+        log.info("Retornando lista de itens: {} ", activeItemsDto);
+        return activeItemsDto;
+    }
+
 
     @Override
     public ItemDto findById(String itemId) {
@@ -43,10 +56,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item save(ItemDto item) {
-        log.info("Salvando o item: {} ", item);
+    public Item save(ItemDto itemDto) {
+        log.info("Mapeando o itemDto para item: {} ", itemDto);
+        var item = itemMapper.toItem(itemDto);
 
-        return repository.insert(itemMapper.toItem(item));
+        item.setActive(true);
+
+        log.info("Salvando o item: {} ", item);
+        return repository.insert(item);
     }
 
     @Override
@@ -65,6 +82,21 @@ public class ItemServiceImpl implements ItemService {
                 .orElseThrow(() -> new EmptyOptionalException(itemNotFoundMessage(itemId)));
         log.info("Deletando o item {}: ", item);
         this.repository.delete(item);
+    }
+
+    @Override
+    public void saveAfterSell(String itemId) {
+
+        var item = itemMapper.toItem(findById(itemId));
+
+        var itemNewQuantity = item.getQuantidade() - 1;
+
+        if (itemNewQuantity == 0)
+            item.setActive(false);
+        
+        item.setQuantidade(itemNewQuantity);
+
+        repository.save(item);
     }
 
     public String itemNotFoundMessage(String itemId) {

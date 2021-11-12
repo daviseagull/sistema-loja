@@ -31,6 +31,14 @@ public class Item {
     private String nome;
 
     @Schema(
+            name = "active",
+            description = "campo usado para filtrar os itens ativos (quantidade > 0)",
+            example = "true",
+            required = true
+    )
+    private boolean active;
+
+    @Schema(
             name = "preço",
             description = "Preço unitário do item.",
             example = "21.40",

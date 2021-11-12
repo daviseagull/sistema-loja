@@ -6,6 +6,7 @@ import br.com.roseai.sistemaloja.mapper.VendaMapper;
 import br.com.roseai.sistemaloja.model.ResumoVendaDto;
 import br.com.roseai.sistemaloja.model.VendaDto;
 import br.com.roseai.sistemaloja.repository.VendaRepository;
+import br.com.roseai.sistemaloja.service.ItemService;
 import br.com.roseai.sistemaloja.service.VendaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,19 +19,20 @@ import java.util.List;
 @Slf4j
 public class VendaServiceImpl implements VendaService {
 
-    private final VendaRepository repository;
+    private final VendaRepository vendaRepository;
+    private final ItemService itemService;
     private final VendaMapper vendaMapper;
 
     @Override
     public Venda findById(String id) {
-        return repository.findById(id).stream()
+        return vendaRepository.findById(id).stream()
                 .findFirst()
                 .orElseThrow(() -> new EmptyOptionalException(vendaNotFoundMessage(id)));
     }
 
     @Override
     public List<ResumoVendaDto> getResumoVendas() {
-        var vendas = repository.findAll();
+        var vendas = vendaRepository.findAll();
 
         var resumoVenda = vendaMapper.toResumoVendaDtos(vendas);
 
@@ -41,8 +43,16 @@ public class VendaServiceImpl implements VendaService {
 
     @Override
     public Venda save(VendaDto vendaDTO) {
+        var itens = vendaDTO.getItens();
+
+        log.info("Subtraindo um da quantidade destes itens: {}", itens);
+        itens.forEach(itemService::saveAfterSell);
+
+        log.info("Mapeando venda para vendaDto: {}", vendaDTO);
         var venda = vendaMapper.toVenda(vendaDTO);
-        return repository.save(venda);
+
+        log.info("Retornando venda criada: {}", venda);
+        return vendaRepository.save(venda);
     }
 
     public String vendaNotFoundMessage(String vendaId) {

@@ -48,7 +48,7 @@ public class Venda implements Serializable {
             description = "Array com os itens da venda.",
             required = true
     ))
-    private List<Item> itens;
+    private List<String> itens;
 
     @Schema(
             name = "formaPagamento",

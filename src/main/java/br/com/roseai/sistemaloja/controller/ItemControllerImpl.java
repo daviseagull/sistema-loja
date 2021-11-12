@@ -32,6 +32,11 @@ public class ItemControllerImpl implements ItemController {
         return ResponseEntity.ok(itemService.getResumoEstoque());
     }
 
+    @GetMapping("/list/ativos")
+    public ResponseEntity<List<ItemDto>> getActiveItems() {
+        return ResponseEntity.ok(itemService.getActiveItems());
+    }
+
     @PostMapping
     public ResponseEntity<String> createItem(@Valid @RequestBody ItemDto item) {
         itemService.save(item);

@@ -49,11 +49,11 @@ public class VendaDto implements Serializable {
 
     @ArraySchema(schema = @Schema(
             name = "itens",
-            description = "Array com os itens da venda.",
+            description = "Array com os ids dos itens da venda.",
             required = true
     ))
     @NotEmpty
-    private List<ItemDto> itens;
+    private List<String> itens;
 
     @Schema(
             name = "formaPagamento",

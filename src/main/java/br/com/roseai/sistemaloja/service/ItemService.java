@@ -11,10 +11,13 @@ public interface ItemService {
 
     ItemDto findById(String itemId);
 
-    Item save(ItemDto venda);
+    Item save(ItemDto item);
+
+    void saveAfterSell(String itemId);
 
     void update(String id, ItemDto item);
 
     void delete(String itemId);
 
+    List<ItemDto> getActiveItems();
 }

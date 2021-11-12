@@ -14,8 +14,6 @@ public interface VendaMapper {
     @Mapping(target = "dataCriacao", ignore = true)
     Venda toVenda(VendaDto vendaDto);
 
-    VendaDto toVendaDto(Venda venda);
-
     @Mapping(target = "cpf", source = "venda.cliente.cpf")
     @Mapping(target = "nome", source = "venda.cliente.nome")
     @Mapping(target = "data", source = "dataCriacao")

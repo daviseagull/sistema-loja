@@ -50,9 +50,7 @@ public class ItemDto implements Serializable {
     @NotNull
     private Double preco;
 
-    @
-
-            Schema(
+    @Schema(
             name = "quantidade",
             description = "Quantidade do item no estoque.",
             example = "100",
