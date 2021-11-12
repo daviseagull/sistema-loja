@@ -78,7 +78,7 @@ class ItemControllerImplTest {
     void testGetItens() throws Exception {
         var itensMock = ItemDtoMock.buildList();
 
-        when(itemService.getResumoEstoque()).thenReturn(itensMock);
+        when(itemService.getInventory()).thenReturn(itensMock);
 
         var responseExpect = writeValueAsString(itensMock).toCharArray();
 

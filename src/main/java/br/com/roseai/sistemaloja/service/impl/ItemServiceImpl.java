@@ -21,26 +21,26 @@ public class ItemServiceImpl implements ItemService {
     private final ItemMapper itemMapper;
 
     @Override
-    public List<ItemDto> getResumoEstoque() {
+    public List<ItemDto> getInventory() {
 
-        var itens = repository.findAll();
+        var itemList = repository.findAll();
 
-        log.info("Mapeando lista para itemDto: {}", itens);
-        var resumoEstoque = itemMapper.toItemDtos(itens);
+        log.info("Mapeando lista para itemDto: {}", itemList);
+        var inventory = itemMapper.toItemDtos(itemList);
 
-        log.info("Retornando lista de itens: {} ", resumoEstoque);
-        return resumoEstoque;
+        log.info("Retornando lista de itens: {} ", inventory);
+        return inventory;
     }
 
     @Override
-    public List<ItemDto> getActiveItems() {
-        var activeItems = repository.findAllByActiveIsTrue();
+    public List<ItemDto> getActiveItemList() {
+        var activeItemList = repository.findAllByActiveIsTrue();
 
-        log.info("Mapeando lista para itemDto: {}", activeItems);
-        var activeItemsDto = itemMapper.toItemDtos(activeItems);
+        log.info("Mapeando lista para itemDto: {}", activeItemList);
+        var itemDtoList = itemMapper.toItemDtos(activeItemList);
 
-        log.info("Retornando lista de itens: {} ", activeItemsDto);
-        return activeItemsDto;
+        log.info("Retornando lista de itens: {} ", itemDtoList);
+        return itemDtoList;
     }
 
 
@@ -89,12 +89,12 @@ public class ItemServiceImpl implements ItemService {
 
         var item = itemMapper.toItem(findById(itemId));
 
-        var itemNewQuantity = item.getQuantidade() - 1;
+        var itemNewQuantity = item.getQuantity() - 1;
 
         if (itemNewQuantity == 0)
             item.setActive(false);
-        
-        item.setQuantidade(itemNewQuantity);
+
+        item.setQuantity(itemNewQuantity);
 
         repository.save(item);
     }

@@ -34,7 +34,7 @@ class ItemServiceImplTest {
         when(itemRepository.findAll()).thenReturn(itens);
         when(itemMapper.toItemDtos(itens)).thenReturn(itemDtos);
 
-        var result = itemService.getResumoEstoque();
+        var result = itemService.getInventory();
 
         assertThat(result).isEqualTo(itemDtos);
     }

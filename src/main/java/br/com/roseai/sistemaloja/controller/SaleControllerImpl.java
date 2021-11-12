@@ -1,10 +1,10 @@
 package br.com.roseai.sistemaloja.controller;
 
-import br.com.roseai.sistemaloja.entity.Venda;
+import br.com.roseai.sistemaloja.entity.Sale;
 import br.com.roseai.sistemaloja.exception.BadRequestException;
-import br.com.roseai.sistemaloja.model.ResumoVendaDto;
-import br.com.roseai.sistemaloja.model.VendaDto;
-import br.com.roseai.sistemaloja.service.VendaService;
+import br.com.roseai.sistemaloja.model.SaleDto;
+import br.com.roseai.sistemaloja.model.SaleSummaryDto;
+import br.com.roseai.sistemaloja.service.SaleService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -17,26 +17,26 @@ import java.util.List;
 @RestController
 @RequestMapping("venda/v1")
 @RequiredArgsConstructor
-public class VendaControllerImpl implements VendaController {
+public class SaleControllerImpl implements SaleController {
 
-    private final VendaService vendaService;
+    private final SaleService saleService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Venda> getVenda(@PathVariable String id) {
+    public ResponseEntity<Sale> getSale(@PathVariable String id) {
         if (StringUtils.isBlank(id))
             throw new BadRequestException("Id não pode ser nulo.");
 
-        return ResponseEntity.ok(vendaService.findById(id));
+        return ResponseEntity.ok(saleService.findById(id));
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ResumoVendaDto>> getResumoVendas() {
-        return ResponseEntity.ok(vendaService.getResumoVendas());
+    public ResponseEntity<List<SaleSummaryDto>> getSaleSummaryList() {
+        return ResponseEntity.ok(saleService.getSaleSummaryList());
     }
 
     @PostMapping("")
-    public ResponseEntity<String> createVenda(@Valid @RequestBody VendaDto venda) {
-        vendaService.save(venda);
+    public ResponseEntity<String> createSale(@Valid @RequestBody SaleDto saleDto) {
+        saleService.save(saleDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

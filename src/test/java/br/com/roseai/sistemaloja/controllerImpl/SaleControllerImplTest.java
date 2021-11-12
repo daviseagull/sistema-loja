@@ -1,10 +1,10 @@
 package br.com.roseai.sistemaloja.controllerImpl;
 
-import br.com.roseai.sistemaloja.controller.VendaControllerImpl;
-import br.com.roseai.sistemaloja.mock.ResumoVendaDtoMock;
-import br.com.roseai.sistemaloja.mock.VendaDtoMock;
-import br.com.roseai.sistemaloja.mock.VendaMock;
-import br.com.roseai.sistemaloja.service.VendaService;
+import br.com.roseai.sistemaloja.controller.SaleControllerImpl;
+import br.com.roseai.sistemaloja.mock.SaleDtoMock;
+import br.com.roseai.sistemaloja.mock.SaleMock;
+import br.com.roseai.sistemaloja.mock.SaleSummaryDtoMock;
+import br.com.roseai.sistemaloja.service.SaleService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,12 +27,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = VendaControllerImpl.class)
+@WebMvcTest(controllers = SaleControllerImpl.class)
 @ActiveProfiles("test")
-class VendaControllerImplTest {
+class SaleControllerImplTest {
 
     @MockBean
-    private VendaService vendaService;
+    private SaleService saleService;
 
     private MockMvc mvc;
 
@@ -55,9 +55,9 @@ class VendaControllerImplTest {
     @Test
     void testGetVenda() throws Exception {
         var vendaId = "1234";
-        var vendaMock = VendaMock.build();
+        var vendaMock = SaleMock.build();
 
-        when(vendaService.findById(vendaId)).thenReturn(vendaMock);
+        when(saleService.findById(vendaId)).thenReturn(vendaMock);
 
         var responseExpect = writeValueAsString(vendaMock).toCharArray();
 
@@ -77,9 +77,9 @@ class VendaControllerImplTest {
 
     @Test
     void testGetResumoVendas() throws Exception {
-        var resumoVendaDtos = ResumoVendaDtoMock.buildList();
+        var resumoVendaDtos = SaleSummaryDtoMock.buildList();
 
-        when(vendaService.getResumoVendas()).thenReturn(resumoVendaDtos);
+        when(saleService.getSaleSummaryList()).thenReturn(resumoVendaDtos);
 
         var responseExpect = writeValueAsString(resumoVendaDtos).toCharArray();
 
@@ -99,10 +99,10 @@ class VendaControllerImplTest {
 
     @Test
     void testCreateItem() throws Exception {
-        var vendaDto = VendaDtoMock.build();
-        var venda = VendaMock.build();
+        var vendaDto = SaleDtoMock.build();
+        var venda = SaleMock.build();
 
-        when(vendaService.save(vendaDto)).thenReturn(venda);
+        when(saleService.save(vendaDto)).thenReturn(venda);
 
         this.mvc.perform(
                         post("/venda/v1")

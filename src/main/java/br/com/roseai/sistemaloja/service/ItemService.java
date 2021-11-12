@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ItemService {
 
-    List<ItemDto> getResumoEstoque();
+    List<ItemDto> getInventory();
 
     ItemDto findById(String itemId);
 
@@ -19,5 +19,5 @@ public interface ItemService {
 
     void delete(String itemId);
 
-    List<ItemDto> getActiveItems();
+    List<ItemDto> getActiveItemList();
 }

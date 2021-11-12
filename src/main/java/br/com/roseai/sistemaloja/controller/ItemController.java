@@ -43,7 +43,7 @@ public interface ItemController {
                     )
             }
     )
-    public ResponseEntity<List<ItemDto>> getItens();
+    public ResponseEntity<List<ItemDto>> getItemList();
 
     @Operation(
             summary = "Endpoint para criação de um item.",

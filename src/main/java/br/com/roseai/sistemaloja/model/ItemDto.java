@@ -30,7 +30,7 @@ public class ItemDto implements Serializable {
             required = true
     )
     @NotBlank
-    private String codigo;
+    private String code;
 
     @Schema(
             name = "nome",
@@ -39,7 +39,7 @@ public class ItemDto implements Serializable {
             required = true
     )
     @NotBlank
-    private String nome;
+    private String name;
 
     @Schema(
             name = "preço",
@@ -48,7 +48,7 @@ public class ItemDto implements Serializable {
             required = true
     )
     @NotNull
-    private Double preco;
+    private Double price;
 
     @Schema(
             name = "quantidade",
@@ -57,6 +57,7 @@ public class ItemDto implements Serializable {
             required = true
     )
     @Min(1)
-    private Integer quantidade;
+    private Integer quantity;
+
 
 }

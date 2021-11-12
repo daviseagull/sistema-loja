@@ -20,7 +20,7 @@ public class Item {
             example = "875ABF4543",
             required = true
     )
-    private String codigo;
+    private String code;
 
     @Schema(
             name = "nome",
@@ -28,7 +28,7 @@ public class Item {
             example = "Arroz 5KG",
             required = true
     )
-    private String nome;
+    private String name;
 
     @Schema(
             name = "active",
@@ -44,7 +44,7 @@ public class Item {
             example = "21.40",
             required = true
     )
-    private Double preco;
+    private Double price;
 
     @Schema(
             name = "quantidade",
@@ -52,5 +52,5 @@ public class Item {
             example = "100",
             required = true
     )
-    private Integer quantidade;
+    private Integer quantity;
 }

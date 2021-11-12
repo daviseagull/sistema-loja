@@ -1,9 +1,9 @@
 package br.com.roseai.sistemaloja.controller;
 
 import br.com.roseai.sistemaloja.entity.Item;
-import br.com.roseai.sistemaloja.entity.Venda;
-import br.com.roseai.sistemaloja.model.ResumoVendaDto;
-import br.com.roseai.sistemaloja.model.VendaDto;
+import br.com.roseai.sistemaloja.entity.Sale;
+import br.com.roseai.sistemaloja.model.SaleDto;
+import br.com.roseai.sistemaloja.model.SaleSummaryDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-public interface VendaController {
+public interface SaleController {
 
     @Operation(
             summary = "Endpoint para retorno de uma venda.",
@@ -29,7 +29,7 @@ public interface VendaController {
                     )
             }
     )
-    public ResponseEntity<Venda> getVenda(@PathVariable String id);
+    public ResponseEntity<Sale> getSale(@PathVariable String id);
 
     @Operation(
             summary = "Endpoint para retorno dos resumos das vendas.",
@@ -44,7 +44,7 @@ public interface VendaController {
                     )
             }
     )
-    public ResponseEntity<List<ResumoVendaDto>> getResumoVendas();
+    public ResponseEntity<List<SaleSummaryDto>> getSaleSummaryList();
 
     @Operation(
             summary = "Endpoint para criação de uma venda.",
@@ -59,6 +59,6 @@ public interface VendaController {
                     )
             }
     )
-    public ResponseEntity<String> createVenda(@RequestBody VendaDto venda);
+    public ResponseEntity<String> createSale(@RequestBody SaleDto saleDto);
 
 }

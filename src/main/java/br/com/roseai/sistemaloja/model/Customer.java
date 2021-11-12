@@ -6,11 +6,17 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Getter
 @Builder
 @ToString
 @EqualsAndHashCode
-public class Cliente {
+public class Customer implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1053456475434442950L;
 
     @Schema(
             name = "cpf",
@@ -24,6 +30,6 @@ public class Cliente {
             description = "Nome do cliente que realizou a venda.",
             required = true
     )
-    private String nome;
+    private String name;
 
 }

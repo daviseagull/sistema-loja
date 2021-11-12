@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Builder
 @ToString
 @EqualsAndHashCode
-public class ResumoVendaDto implements Serializable {
+public class SaleSummaryDto implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -6428679363338689247L;
@@ -31,7 +31,7 @@ public class ResumoVendaDto implements Serializable {
             description = "Nome do cliente que realizou a venda.",
             required = true
     )
-    private String nome;
+    private String name;
 
     @Schema(
             name = "cpf",
@@ -46,7 +46,7 @@ public class ResumoVendaDto implements Serializable {
             example = "210.53",
             required = true
     )
-    private Double valorTotal;
+    private Double totalPrice;
 
     @Schema(
             name = "dataCriacao",
@@ -54,6 +54,6 @@ public class ResumoVendaDto implements Serializable {
             example = "20/10/2021",
             required = true
     )
-    private String data;
+    private String creationDate;
 
 }

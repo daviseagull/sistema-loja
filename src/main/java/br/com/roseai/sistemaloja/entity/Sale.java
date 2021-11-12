@@ -1,28 +1,25 @@
-package br.com.roseai.sistemaloja.model;
+package br.com.roseai.sistemaloja.entity;
 
+import br.com.roseai.sistemaloja.model.Customer;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
+@Setter
 @Builder
 @ToString
 @EqualsAndHashCode
-public class VendaDto implements Serializable {
+@Document
+public class Sale implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 5272551353402780575L;
-
+    @Id
     @Schema(
             name = "id",
             description = "Código único da venda.",
@@ -36,7 +33,7 @@ public class VendaDto implements Serializable {
             description = "Informações do cliente.",
             required = true
     )
-    private Cliente cliente;
+    private Customer customer;
 
     @Schema(
             name = "valorTotal",
@@ -44,16 +41,14 @@ public class VendaDto implements Serializable {
             example = "210.53",
             required = true
     )
-    @NotNull
-    private Double valorTotal;
+    private Double totalPrice;
 
     @ArraySchema(schema = @Schema(
             name = "itens",
-            description = "Array com os ids dos itens da venda.",
+            description = "Array com os itens da venda.",
             required = true
     ))
-    @NotEmpty
-    private List<String> itens;
+    private List<String> items;
 
     @Schema(
             name = "formaPagamento",
@@ -61,7 +56,14 @@ public class VendaDto implements Serializable {
             example = "credito",
             required = true
     )
-    @NotBlank
-    private String formaPagamento;
+    private String paymentForm;
+
+    @Schema(
+            name = "dataCriacao",
+            description = "Data de criação da venda.",
+            example = "20/10/2021",
+            required = true
+    )
+    private LocalDateTime creationDate;
 
 }

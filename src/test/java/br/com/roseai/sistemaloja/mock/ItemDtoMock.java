@@ -6,21 +6,21 @@ import java.util.List;
 
 public class ItemDtoMock {
 
-    public static ItemDto build(){
+    public static ItemDto build() {
         return ItemDto.builder()
-                .codigo("1234")
-                .nome("Teste")
-                .preco(21.0)
-                .quantidade(45)
+                .code("1234")
+                .name("Teste")
+                .price(21.0)
+                .quantity(45)
                 .build();
     }
 
-    public static List<ItemDto> buildList(){
+    public static List<ItemDto> buildList() {
         return List.of(ItemDto.builder()
-                .codigo("1234")
-                .nome("Teste")
-                .preco(21.0)
-                .quantidade(45)
+                .code("1234")
+                .name("Teste")
+                .price(21.0)
+                .quantity(45)
                 .build());
     }
 

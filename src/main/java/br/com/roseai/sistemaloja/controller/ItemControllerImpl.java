@@ -28,13 +28,13 @@ public class ItemControllerImpl implements ItemController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ItemDto>> getItens() {
-        return ResponseEntity.ok(itemService.getResumoEstoque());
+    public ResponseEntity<List<ItemDto>> getItemList() {
+        return ResponseEntity.ok(itemService.getInventory());
     }
 
     @GetMapping("/list/ativos")
     public ResponseEntity<List<ItemDto>> getActiveItems() {
-        return ResponseEntity.ok(itemService.getActiveItems());
+        return ResponseEntity.ok(itemService.getActiveItemList());
     }
 
     @PostMapping
