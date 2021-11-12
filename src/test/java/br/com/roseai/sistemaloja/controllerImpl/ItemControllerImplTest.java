@@ -53,16 +53,16 @@ class ItemControllerImplTest {
     }
 
     @Test
-    void testGetItem() throws Exception {
+    void testGetActiveItems() throws Exception {
         var itemId = "1234";
-        var itemMock = ItemResponseMock.build();
+        var itemMock = ItemResponseMock.buildList();
 
-        when(itemService.findById(itemId)).thenReturn(itemMock);
+        when(itemService.getActiveItemList()).thenReturn(itemMock);
 
         var responseExpect = writeValueAsString(itemMock).toCharArray();
 
         var response = this.mvc.perform(
-                        get("/item/v1/{id}", itemId)
+                        get("/item/v1/list/active")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
                 )

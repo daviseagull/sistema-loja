@@ -41,21 +41,6 @@ class ItemServiceImplTest {
     }
 
     @Test
-    void testFindById() {
-        var itemId = "1234";
-        var itemOpt = ItemMock.buildOpt();
-        var item = ItemMock.build();
-        var itemResponse = ItemResponseMock.build();
-
-        when(itemRepository.findById(itemId)).thenReturn(itemOpt);
-        when(itemMapper.toItemResponse(item)).thenReturn(itemResponse);
-
-        var result = itemService.findById(itemId);
-
-        assertThat(result).isEqualTo(itemResponse);
-    }
-
-    @Test
     void testSave() {
         var item = ItemMock.build();
         var itemDto = ItemDtoMock.build();
