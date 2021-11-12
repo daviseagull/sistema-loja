@@ -10,7 +10,7 @@ public class VendaDtoMock {
         return VendaDto.builder()
                 .cliente(ClienteMock.build())
                 .id("1234")
-                .itens(List.of(ItemMock.build()))
+                .itens(List.of(ItemDtoMock.build()))
                 .valorTotal(12.34)
                 .formaPagamento("credito")
                 .build();

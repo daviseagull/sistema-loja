@@ -53,7 +53,7 @@ public class Venda implements Serializable {
     @Schema(
             name = "formaPagamento",
             description = "Forma de pagamento realizada na venda.",
-            example = "210.53",
+            example = "credito",
             required = true
     )
     private String formaPagamento;

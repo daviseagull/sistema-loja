@@ -15,75 +15,75 @@ import java.util.List;
 
 public interface ItemController {
 
-    @Operation (
+    @Operation(
             summary = "Endpoint para retorno de um item.",
             responses = {
-                    @ApiResponse (
+                    @ApiResponse(
                             description = "Dados obtidos com sucesso.",
                             responseCode = "200",
-                            content = @Content (
+                            content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema (implementation = Item.class)
+                                    schema = @Schema(implementation = Item.class)
                             )
                     )
             }
     )
-    public ResponseEntity<Item> getItem(@PathVariable String id);
+    public ResponseEntity<ItemDto> getItem(@PathVariable String id);
 
-    @Operation (
+    @Operation(
             summary = "Endpoint para retorno de todos itens.",
             responses = {
-                    @ApiResponse (
+                    @ApiResponse(
                             description = "Dados obtidos com sucesso.",
                             responseCode = "200",
-                            content = @Content (
+                            content = @Content(
                                     mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema (implementation = Item.class))
+                                    array = @ArraySchema(schema = @Schema(implementation = Item.class))
                             )
                     )
             }
     )
     public ResponseEntity<List<ItemDto>> getItens();
 
-    @Operation (
+    @Operation(
             summary = "Endpoint para criação de um item.",
             responses = {
-                    @ApiResponse (
+                    @ApiResponse(
                             description = "Item criado com sucesso.",
                             responseCode = "200",
-                            content = @Content (
+                            content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema (implementation = String.class)
+                                    schema = @Schema(implementation = String.class)
                             )
                     )
             }
     )
     public ResponseEntity<String> createItem(@RequestBody ItemDto item);
 
-    @Operation (
+    @Operation(
             summary = "Endpoint para atualização de um item.",
             responses = {
-                    @ApiResponse (
+                    @ApiResponse(
                             description = "Item atualizado com sucesso.",
                             responseCode = "200",
-                            content = @Content (
+                            content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema (implementation = String.class)
+                                    schema = @Schema(implementation = String.class)
                             )
                     )
             }
     )
     public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody ItemDto item);
 
-    @Operation (
+    @Operation(
             summary = "Endpoint para exclusão de um item.",
             responses = {
-                    @ApiResponse (
+                    @ApiResponse(
                             description = "Item excluido com sucesso.",
                             responseCode = "200",
-                            content = @Content (
+                            content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema (implementation = String.class)
+                                    schema = @Schema(implementation = String.class)
                             )
                     )
             }

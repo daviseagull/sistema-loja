@@ -5,7 +5,6 @@ import br.com.roseai.sistemaloja.model.ResumoVendaDto;
 import br.com.roseai.sistemaloja.model.VendaDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface VendaService {
 
@@ -13,6 +12,6 @@ public interface VendaService {
 
     Venda save(VendaDto venda);
 
-    Optional<Venda> findById(String id);
+    Venda findById(String id);
 
 }

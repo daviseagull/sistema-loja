@@ -1,14 +1,17 @@
 package br.com.roseai.sistemaloja.controller;
 
 import br.com.roseai.sistemaloja.entity.Venda;
+import br.com.roseai.sistemaloja.exception.BadRequestException;
 import br.com.roseai.sistemaloja.model.ResumoVendaDto;
 import br.com.roseai.sistemaloja.model.VendaDto;
 import br.com.roseai.sistemaloja.service.VendaService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,12 +23,10 @@ public class VendaControllerImpl implements VendaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Venda> getVenda(@PathVariable String id) {
-        var vendaOpt = vendaService.findById(id);
-        if (vendaOpt.isPresent()) {
-            var venda = vendaOpt.get();
-            return ResponseEntity.ok(venda);
-        }
-        return ResponseEntity.ok().build();
+        if (StringUtils.isBlank(id))
+            throw new BadRequestException("Id não pode ser nulo.");
+
+        return ResponseEntity.ok(vendaService.findById(id));
     }
 
     @GetMapping("/list")
@@ -34,9 +35,9 @@ public class VendaControllerImpl implements VendaController {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> createVenda(@RequestBody VendaDto venda) {
-        var createdVenda = vendaService.save(venda);
-        return ResponseEntity.created(URI.create("/venda/" + createdVenda.getId())).build();
+    public ResponseEntity<String> createVenda(@Valid @RequestBody VendaDto venda) {
+        vendaService.save(venda);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

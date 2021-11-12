@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -26,30 +29,36 @@ public class ItemDto implements Serializable {
             example = "875ABF4543",
             required = true
     )
+    @NotBlank
     private String codigo;
 
-    @Schema (
+    @Schema(
             name = "nome",
             description = "Nome do item.",
             example = "Arroz 5KG",
             required = true
     )
+    @NotBlank
     private String nome;
 
-    @Schema (
+    @Schema(
             name = "preço",
             description = "Preço unitário do item.",
             example = "21.40",
             required = true
     )
+    @NotNull
     private Double preco;
 
-    @Schema (
+    @
+
+            Schema(
             name = "quantidade",
             description = "Quantidade do item no estoque.",
             example = "100",
             required = true
     )
+    @Min(1)
     private Integer quantidade;
 
 }

@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.net.URI;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,10 +55,9 @@ class VendaControllerImplTest {
     @Test
     void testGetVenda() throws Exception {
         var vendaId = "1234";
-        var vendaMockOpt = VendaMock.buildOpt();
         var vendaMock = VendaMock.build();
 
-        when(vendaService.findById(vendaId)).thenReturn(vendaMockOpt);
+        when(vendaService.findById(vendaId)).thenReturn(vendaMock);
 
         var responseExpect = writeValueAsString(vendaMock).toCharArray();
 
@@ -106,21 +104,14 @@ class VendaControllerImplTest {
 
         when(vendaService.save(vendaDto)).thenReturn(venda);
 
-        var responseExpect = (URI.create("/venda/" + venda.getId())).toString().toCharArray();
-
-        var response = this.mvc.perform(
+        this.mvc.perform(
                         post("/venda/v1")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(writeValueAsString(venda))
                                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
                 )
-                .andExpect(status().isCreated())
-                .andReturn().getResponse().getHeaderValue("Location").toString().toCharArray();
+                .andExpect(status().isCreated());
 
-        Arrays.sort(response);
-        Arrays.sort(responseExpect);
-
-        assertThat(new String(response)).isNotNull().isEqualTo(new String(responseExpect));
     }
 
     private static String writeValueAsString(Object value) throws JsonProcessingException {

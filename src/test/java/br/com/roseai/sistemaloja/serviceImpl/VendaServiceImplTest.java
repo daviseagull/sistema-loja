@@ -2,6 +2,7 @@ package br.com.roseai.sistemaloja.serviceImpl;
 
 import br.com.roseai.sistemaloja.mapper.VendaMapper;
 import br.com.roseai.sistemaloja.mock.ResumoVendaDtoMock;
+import br.com.roseai.sistemaloja.mock.VendaDtoMock;
 import br.com.roseai.sistemaloja.mock.VendaMock;
 import br.com.roseai.sistemaloja.repository.VendaRepository;
 import br.com.roseai.sistemaloja.service.impl.VendaServiceImpl;
@@ -30,12 +31,13 @@ class VendaServiceImplTest {
     void testFindById() {
         var vendaId = "1234";
         var vendaOpt = VendaMock.buildOpt();
+        var venda = VendaMock.build();
 
         when(vendaRepository.findById(vendaId)).thenReturn(vendaOpt);
 
         var result = vendaService.findById(vendaId);
 
-        assertThat(result).isEqualTo(vendaOpt);
+        assertThat(result).isEqualTo(venda);
     }
 
     @Test
@@ -49,5 +51,18 @@ class VendaServiceImplTest {
         var result = vendaService.getResumoVendas();
 
         assertThat(result).isEqualTo(resumoVendas);
+    }
+
+    @Test
+    void testSave() {
+        var vendaDto = VendaDtoMock.build();
+        var venda = VendaMock.build();
+
+        when(vendaMapper.toVenda(vendaDto)).thenReturn(venda);
+        when(vendaRepository.save(venda)).thenReturn(venda);
+
+        var result = vendaService.save(vendaDto);
+
+        assertThat(result).isEqualTo(venda);
     }
 }

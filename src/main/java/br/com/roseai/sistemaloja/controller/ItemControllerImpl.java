@@ -1,13 +1,15 @@
 package br.com.roseai.sistemaloja.controller;
 
-import br.com.roseai.sistemaloja.entity.Item;
+import br.com.roseai.sistemaloja.exception.BadRequestException;
 import br.com.roseai.sistemaloja.model.ItemDto;
 import br.com.roseai.sistemaloja.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,13 +20,11 @@ public class ItemControllerImpl implements ItemController {
     private final ItemService itemService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Item> getItem(@PathVariable String id) {
-        var itemOpt = itemService.findById(id);
-        if (itemOpt.isPresent()) {
-            var item = itemOpt.get();
-            return ResponseEntity.ok(item);
-        }
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ItemDto> getItem(@PathVariable String id) {
+        if (StringUtils.isBlank(id))
+            throwBadRequestException();
+
+        return ResponseEntity.ok(itemService.findById(id));
     }
 
     @GetMapping("/list")
@@ -32,22 +32,31 @@ public class ItemControllerImpl implements ItemController {
         return ResponseEntity.ok(itemService.getResumoEstoque());
     }
 
-    @PostMapping()
-    public ResponseEntity<String> createItem(@RequestBody ItemDto item) {
-        var createdItem = itemService.save(item);
-        return ResponseEntity.created(URI.create("/item/" + createdItem.getCodigo())).build();
+    @PostMapping
+    public ResponseEntity<String> createItem(@Valid @RequestBody ItemDto item) {
+        itemService.save(item);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateItem(@PathVariable String id, @RequestBody ItemDto item) {
+    public ResponseEntity<String> updateItem(@PathVariable String id, @Valid @RequestBody ItemDto item) {
+        if (StringUtils.isBlank(id))
+            throwBadRequestException();
+
         itemService.update(id, item);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteItem(@PathVariable String id) {
+        if (StringUtils.isBlank(id))
+            throwBadRequestException();
         itemService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    public void throwBadRequestException() {
+        throw new BadRequestException("Id não pode ser nulo.");
     }
 
 }

@@ -1,6 +1,5 @@
 package br.com.roseai.sistemaloja.model;
 
-import br.com.roseai.sistemaloja.entity.Item;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -8,6 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
@@ -42,6 +44,7 @@ public class VendaDto implements Serializable {
             example = "210.53",
             required = true
     )
+    @NotNull
     private Double valorTotal;
 
     @ArraySchema(schema = @Schema(
@@ -49,14 +52,16 @@ public class VendaDto implements Serializable {
             description = "Array com os itens da venda.",
             required = true
     ))
-    private List<Item> itens;
+    @NotEmpty
+    private List<ItemDto> itens;
 
     @Schema(
             name = "formaPagamento",
             description = "Forma de pagamento realizada na venda.",
-            example = "210.53",
+            example = "credito",
             required = true
     )
+    @NotBlank
     private String formaPagamento;
 
 }

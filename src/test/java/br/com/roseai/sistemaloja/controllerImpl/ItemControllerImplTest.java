@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.net.URI;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,10 +54,9 @@ class ItemControllerImplTest {
     @Test
     void testGetItem() throws Exception {
         var itemId = "1234";
-        var itemMockOpt = ItemMock.buildOpt();
-        var itemMock = ItemMock.build();
+        var itemMock = ItemDtoMock.build();
 
-        when(itemService.findById(itemId)).thenReturn(itemMockOpt);
+        when(itemService.findById(itemId)).thenReturn(itemMock);
 
         var responseExpect = writeValueAsString(itemMock).toCharArray();
 
@@ -105,21 +103,14 @@ class ItemControllerImplTest {
 
         when(itemService.save(itemDto)).thenReturn(item);
 
-        var responseExpect = (URI.create("/item/" + item.getCodigo())).toString().toCharArray();
-
-        var response = this.mvc.perform(
+        this.mvc.perform(
                         post("/item/v1")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(writeValueAsString(item))
                                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
                 )
-                .andExpect(status().isCreated())
-                .andReturn().getResponse().getHeaderValue("Location").toString().toCharArray();
+                .andExpect(status().isCreated());
 
-        Arrays.sort(response);
-        Arrays.sort(responseExpect);
-
-        assertThat(new String(response)).isNotNull().isEqualTo(new String(responseExpect));
     }
 
     @Test
@@ -129,7 +120,7 @@ class ItemControllerImplTest {
 
         doNothing().when(itemService).update(itemId, itemDto);
 
-        var response = this.mvc.perform(
+        this.mvc.perform(
                         put("/item/v1/{id}", itemId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(writeValueAsString(itemDto))
@@ -144,7 +135,7 @@ class ItemControllerImplTest {
 
         doNothing().when(itemService).delete(itemId);
 
-        var response = this.mvc.perform(
+        this.mvc.perform(
                         delete("/item/v1/{id}", itemId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
