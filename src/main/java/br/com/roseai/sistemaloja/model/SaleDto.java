@@ -32,14 +32,14 @@ public class SaleDto implements Serializable {
     private String id;
 
     @Schema(
-            name = "cliente",
+            name = "customer",
             description = "Informações do cliente.",
             required = true
     )
     private Customer customer;
 
     @Schema(
-            name = "valorTotal",
+            name = "totalPrice",
             description = "Valor total da venda.",
             example = "210.53",
             required = true
@@ -48,7 +48,7 @@ public class SaleDto implements Serializable {
     private Double totalPrice;
 
     @ArraySchema(schema = @Schema(
-            name = "itens",
+            name = "items",
             description = "Array com os ids dos itens da venda.",
             required = true
     ))
@@ -56,7 +56,7 @@ public class SaleDto implements Serializable {
     private List<String> items;
 
     @Schema(
-            name = "formaPagamento",
+            name = "paymentForm",
             description = "Forma de pagamento realizada na venda.",
             example = "credito",
             required = true

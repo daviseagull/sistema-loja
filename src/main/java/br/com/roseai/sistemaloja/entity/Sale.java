@@ -29,14 +29,14 @@ public class Sale implements Serializable {
     private String id;
 
     @Schema(
-            name = "cliente",
+            name = "customer",
             description = "Informações do cliente.",
             required = true
     )
     private Customer customer;
 
     @Schema(
-            name = "valorTotal",
+            name = "totalPrice",
             description = "Valor total da venda.",
             example = "210.53",
             required = true
@@ -44,14 +44,14 @@ public class Sale implements Serializable {
     private Double totalPrice;
 
     @ArraySchema(schema = @Schema(
-            name = "itens",
+            name = "items",
             description = "Array com os itens da venda.",
             required = true
     ))
     private List<String> items;
 
     @Schema(
-            name = "formaPagamento",
+            name = "paymentForm",
             description = "Forma de pagamento realizada na venda.",
             example = "credito",
             required = true
@@ -59,7 +59,7 @@ public class Sale implements Serializable {
     private String paymentForm;
 
     @Schema(
-            name = "dataCriacao",
+            name = "creationDate",
             description = "Data de criação da venda.",
             example = "20/10/2021",
             required = true

@@ -24,7 +24,7 @@ public class ItemDto implements Serializable {
 
     @Id
     @Schema(
-            name = "codigo",
+            name = "code",
             description = "Codigo do item.",
             example = "875ABF4543",
             required = true
@@ -33,7 +33,7 @@ public class ItemDto implements Serializable {
     private String code;
 
     @Schema(
-            name = "nome",
+            name = "name",
             description = "Nome do item.",
             example = "Arroz 5KG",
             required = true
@@ -42,7 +42,7 @@ public class ItemDto implements Serializable {
     private String name;
 
     @Schema(
-            name = "preço",
+            name = "price",
             description = "Preço unitário do item.",
             example = "21.40",
             required = true
@@ -51,7 +51,7 @@ public class ItemDto implements Serializable {
     private Double price;
 
     @Schema(
-            name = "quantidade",
+            name = "quantity",
             description = "Quantidade do item no estoque.",
             example = "100",
             required = true

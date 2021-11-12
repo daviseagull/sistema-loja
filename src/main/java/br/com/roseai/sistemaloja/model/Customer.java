@@ -26,7 +26,7 @@ public class Customer implements Serializable {
     private String cpf;
 
     @Schema(
-            name = "nome",
+            name = "name",
             description = "Nome do cliente que realizou a venda.",
             required = true
     )

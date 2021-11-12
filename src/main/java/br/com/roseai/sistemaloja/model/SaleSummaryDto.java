@@ -27,7 +27,7 @@ public class SaleSummaryDto implements Serializable {
     private String id;
 
     @Schema(
-            name = "nome",
+            name = "name",
             description = "Nome do cliente que realizou a venda.",
             required = true
     )
@@ -41,7 +41,7 @@ public class SaleSummaryDto implements Serializable {
     private String cpf;
 
     @Schema(
-            name = "valorTotal",
+            name = "totalPrice",
             description = "Valor total da venda.",
             example = "210.53",
             required = true
@@ -49,7 +49,7 @@ public class SaleSummaryDto implements Serializable {
     private Double totalPrice;
 
     @Schema(
-            name = "dataCriacao",
+            name = "creationDate",
             description = "Data de criação da venda.",
             example = "20/10/2021",
             required = true
