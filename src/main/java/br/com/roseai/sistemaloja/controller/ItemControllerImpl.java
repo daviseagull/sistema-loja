@@ -20,6 +20,11 @@ public class ItemControllerImpl implements ItemController {
 
     private final ItemService itemService;
 
+    @GetMapping("{id}")
+    public ResponseEntity<ItemDto> getItem(@PathVariable String id) {
+        return ResponseEntity.ok(itemService.getItem(id));
+    }
+
     @GetMapping("/list")
     public ResponseEntity<List<ItemResponse>> getInventory() {
         return ResponseEntity.ok(itemService.getInventory());

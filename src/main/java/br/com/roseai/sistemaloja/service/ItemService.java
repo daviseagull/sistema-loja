@@ -21,4 +21,6 @@ public interface ItemService {
     ItemDto findDtoById(String itemId);
 
     List<ItemResponse> getActiveItemList();
+
+    ItemDto getItem(String id);
 }

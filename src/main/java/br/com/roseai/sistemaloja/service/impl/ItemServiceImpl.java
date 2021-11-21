@@ -34,6 +34,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public ItemDto getItem(String id) {
+        var item = repository.findById(id).orElseThrow(() -> new EmptyOptionalException(itemNotFoundMessage(id)));
+        return itemMapper.toItemDto(item);
+    }
+
+    @Override
     public List<ItemResponse> getActiveItemList() {
         var activeItemList = repository.findAllByActiveIsTrue();
 
